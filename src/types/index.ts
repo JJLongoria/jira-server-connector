@@ -314,3 +314,22 @@ export interface Component extends Self {
 export interface IssuesCount extends Self {
     issueCount: number;
 }
+
+export interface Configuration {
+    votingEnabled: boolean;
+    watchingEnabled: boolean;
+    unassignedIssuesAllowed: boolean;
+    subTasksEnabled: boolean;
+    issueLinkingEnabled: boolean;
+    timeTrackingEnabled: boolean;
+    attachmentsEnabled: boolean;
+    timeTrackingConfiguration?: ConfigurationTimeTracking;
+}
+
+export interface ConfigurationTimeTracking {
+    workingHoursPerDay: 8;
+    workingDaysPerWeek: 5;
+    timeFormat?: 'pretty' | 'days' | 'hours';
+    defaultUnit?: 'minute' | 'hour' | 'day' | 'week';
+    
+}

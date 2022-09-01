@@ -64,9 +64,9 @@ import { Basic, Component, EndpointService, IssuesCount } from "../types";
      * Delete a project component
      * @param {string} componentId The component id to delete
      * @param {string} [moveIssuesTo] The new component applied to issues whose 'id' component will be deleted. If this value is null, then the 'id' component is simply removed from the related isues
-     * @returns {Promise<Component>} Promise with the full JSON representation of a project component
+     * @returns {Promise<void>} If not throw errors, operation finish successfully
      */
-     async delete(componentId: string, movesIssuesTo?: string): Promise<Component> {
+     async delete(componentId: string, movesIssuesTo?: string): Promise<void> {
         const request = this.doGet({
             param: componentId,
         });
@@ -75,7 +75,7 @@ import { Basic, Component, EndpointService, IssuesCount } from "../types";
                 request.addQueryParam('moveIssuesTo', movesIssuesTo);
             }
             const result = await request.execute();
-            return result.data as Component;
+            return;
         } catch (error) {
             throw error;
         }

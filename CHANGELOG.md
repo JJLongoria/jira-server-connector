@@ -49,4 +49,10 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+- **Implemented all Attachment Endpoints (`/rest/api/latest/configuration`)**:
+
+    - `/rest/api/latest/configuration` (GET)
+
+---
+
 
