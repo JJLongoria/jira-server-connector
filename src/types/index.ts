@@ -140,17 +140,9 @@ export class JiraError extends Error {
 }
 
 export interface JiraErrorData {
-    id: string;
-    title: string;
-    type: string;
-    properties: JiraErrorProperties;
-    additionalProperties: boolean;
-}
-
-export interface JiraErrorProperties {
-    errorMessages: any;
-    errors: any;
-    status: any;
+    errorMessages: string[];
+    errors: { [key: string]: string };
+    status: number;
 }
 
 export interface PageOptions {
@@ -194,7 +186,7 @@ export interface UserPermission {
 export interface Permission {
     key: string;
     name: string;
-    type: string;
+    type: 'GLOBAL' | 'PROJECT';
     description: string;
 }
 
@@ -202,16 +194,6 @@ export interface ApplicationPropertiesOptions {
     key?: string;
     permissionLevel?: string;
     keyFilter?: string;
-}
-
-export interface ApplicationPropertyInput {
-    value?: string;
-    name?: string;
-    desc?: string;
-    type?: string;
-    defaultValue?: string;
-    example?: string;
-    allowedValues?: string[];
 }
 
 export interface ApplicationProperty {
@@ -224,4 +206,19 @@ export interface ApplicationProperty {
     defaultValue: string;
     example?: string;
     allowedValues?: string[];
+}
+
+export interface ApplicationRole {
+    key: string;
+    groups: string[];
+    name: string;
+    defaultGroups: string[];
+    selectedByDefault: boolean;
+    defined: boolean;
+    numberOfSeats: number;
+    remainingSeats: number;
+    userCount: number;
+    userCountDescription: string;
+    hasUnlimitedSeats: boolean;
+    platform: boolean;
 }

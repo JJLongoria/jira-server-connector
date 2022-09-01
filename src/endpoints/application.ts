@@ -1,4 +1,4 @@
-import { ApplicationPropertiesOptions, ApplicationProperty, ApplicationPropertyInput, Basic, EndpointService, PermissionsOutput, UserPermissionsOptions, UserPermissionsOutput } from "../types";
+import { ApplicationPropertiesOptions, ApplicationProperty, Basic, EndpointService } from "../types";
 
 /**
  * Class to manage and expose all endpoits and operations below '/rest/api/latest/application-properties'
@@ -28,10 +28,10 @@ export class ApplicationEndpoint extends EndpointService {
     /**
     * Modify an application property via PUT. The "value" field present in the PUT will override the existing value.
     * @param {string} propertyId The property id to update
-    * @param {ApplicationPropertyInput} property Property data to Update
+    * @param {ApplicationProperty} property Property data to Update
     * @returns {Promise<void>} If not throw errors, operation finish succesfully
     */
-    async update(propertyId: string, property: ApplicationPropertyInput): Promise<void> {
+    async update(propertyId: string, property: ApplicationProperty): Promise<void> {
         const request = this.doPut({
             param: propertyId
         }).asJson().withBody(property);
