@@ -79,4 +79,15 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+- **Implemented all Email Templates Endpoints (`/rest/api/latest/email-templates`)**:
+
+    - `/rest/api/latest/email-templates` (GET, POST)
+    - `/rest/api/latest/email-templates/apply` (POST)
+    - `/rest/api/latest/email-templates/revert` (POST)
+    - `/rest/api/latest/email-templates/types` (GET)
+
+---
+
+
+
 
