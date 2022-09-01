@@ -235,6 +235,8 @@ export interface ApplicationRole {
 export interface ListWrapper<T> {
     size: number;
     'max-results'?: number;
+    'start-index'?: number;
+    'end-index'?: number;
     items: T[];
 }
 
@@ -403,7 +405,7 @@ export interface EntityPropertyKeys {
 }
 
 export interface EntityPropertyKey extends Self {
-    key: string; 
+    key: string;
 }
 
 export interface EntityProperty {
@@ -428,4 +430,127 @@ export interface FieldSchema {
     system: string;
     custom: string;
     customId: number;
+}
+
+
+export interface IssueType {
+    id?: string;
+    description: string;
+    iconUrl?: string;
+    name: string;
+    subtask: boolean;
+    avatarId?: number;
+}
+
+export interface SimpleLink {
+    id: string;
+    styleClass: string;
+    iconClass: string;
+    label: string;
+    title: string;
+    href: string;
+    weight: number;
+}
+
+export interface RemoteEntityLink {
+    name: string;
+    link: any;
+}
+
+export interface Version {
+    id?: string;
+    description: string;
+    name: string;
+    archived: boolean;
+    released: boolean;
+    overdue: boolean;
+    userStartDate: string;
+    userReleaseDate: string;
+    project: string;
+    projectId: number;
+    moveUnfixedIssuesTo: string;
+    operations: SimpleLink[];
+    remotelinks: RemoteEntityLink[];
+}
+
+export interface Project {
+    id?: string;
+    key: string;
+    description: string;
+    lead?: User;
+    components?: Component[];
+    issueTypes?: IssueType[];
+    url: string;
+    email: string;
+    assigneeType?: 'PROJECT_LEAD' | 'UNASSIGNED';
+    versions?: Version[];
+    name: string;
+    roles: { [key: string]: string };
+    avatarUrls: { [key: string]: string };
+    projectKeys: string[];
+    projectCategory: ProjectCategory;
+    projectTypeKey: string;
+    archived: boolean;
+}
+
+export interface ProjectCategory {
+    id: string;
+    name: string;
+    description: string;
+}
+
+export interface ProjectRole {
+    id: string;
+    name: string;
+    description: string;
+    actors: RoleActor[];
+}
+
+export interface RoleActor {
+    id: string;
+    name: string;
+    displayName: string;
+    type: string;
+    avatarUrl: string;
+}
+
+export interface Filter {
+    id?: string;
+    name: string;
+    description: string;
+    owner?: User;
+    jql: string;
+    viewUrl?: string;
+    searchUrl?: string;
+    favourite: boolean;
+    sharePermissions?: FilterPermission[];
+    sharedUsers?: ListWrapper<User>;
+    subscriptions?: ListWrapper<FilterSubscription>;
+    editable: boolean;
+}
+
+export interface FilterSubscription {
+    id: number;
+    user?: User;
+    group?: Group;
+}
+
+export interface FilterPermission {
+    id?: string;
+    type?: string;
+    project?: Project;
+    role?: ProjectRole;
+    group?: Group;
+    user?: User;
+    view: boolean;
+    edit: boolean;
+}
+
+export interface FilterColumn {
+    label: string;
+    value: string;
+}
+
+export interface ShareScope {
+    scope: 'GLOBAL' | 'AUTHENTICATED' | 'PRIVATE';
 }

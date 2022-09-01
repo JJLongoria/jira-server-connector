@@ -8,6 +8,7 @@ import { CustomFieldEndpoint } from "./endpoints/customField";
 import { DashboardEndpoint } from "./endpoints/dashboard";
 import { EmailTemplatesEndpoint } from "./endpoints/emailTemplates";
 import { FieldEndpoint } from "./endpoints/field";
+import { FilterEndpoint } from "./endpoints/filter";
 import { PermissionsEndpoint } from "./endpoints/permissions";
 import { Basic, BasicAuth } from "./types";
 
@@ -88,7 +89,12 @@ export class JiraServerConnector {
     /**
      * Contains all operations from '/rest/api/latest/field'.
      */
-     fields: FieldEndpoint;
+    fields: FieldEndpoint;
+
+    /**
+     * Contains all operations from '/rest/api/latest/filter'.
+     */
+    filters: FilterEndpoint;
 
 
     /**
@@ -108,6 +114,7 @@ export class JiraServerConnector {
         this.dashboards = new DashboardEndpoint(this.auth);
         this.emailTemplates = new EmailTemplatesEndpoint(this.auth);
         this.fields = new FieldEndpoint(this.auth);
+        this.filters = new FilterEndpoint(this.auth);
     }
 
 

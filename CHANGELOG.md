@@ -94,6 +94,30 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+- **Implemented all Field Endpoints (`/rest/api/latest/filter`)**:
+
+    - `/rest/api/latest/filter` (POST)
+    - `/rest/api/latest/filter/{id}` (GET, PUT, DELETE)
+
+    ---
+
+    - `/rest/api/latest/filter/{id}/columns` (GET, PUT, DELETE)
+
+    ---
+
+    - `/rest/api/latest/filter/{id}/permission` (GET, POST)
+    - `/rest/api/latest/filter/{id}/permission/{permission-id}` (GET, DELETE)
+
+    ---
+
+    - `/rest/api/latest/filter/defaultShareScope` (GET, PUT)
+
+    ---
+
+    - `/rest/api/latest/filter/favourite` (GET)
+
+---
+
 
 
 
