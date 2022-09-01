@@ -158,6 +158,10 @@ export class Page<T> {
     total: number = 0;
     isLast: boolean = true;
     values: T[] = [];
+    self: string = '';
+    nextPage: string = '';
+
+    
 }
 
 export interface Self {
@@ -288,4 +292,25 @@ export interface AvatarCroping {
     cropperOffsetY: number;
     url?: string;
     needsCropping: boolean;
+}
+
+export interface Component extends Self {
+    id?: string;
+    name: string;
+    description: string;
+    lead?: User;
+    leadUserName: string;
+    assigneeType: 'PROJECT_DEFAULT' | 'COMPONENT_LEAD' | 'PROJECT_LEAD' | 'UNASSIGNED';
+    assignee?: User;
+    realAssigneeType?: 'PROJECT_DEFAULT' | 'COMPONENT_LEAD' | 'PROJECT_LEAD' | 'UNASSIGNED';
+    realAssignee?: User;
+    isAssigneeTypeValid: boolean;
+    project: string;
+    projectId: number;
+    archived?: boolean;
+    deleted?: boolean;
+}
+
+export interface IssuesCount extends Self {
+    issueCount: number;
 }

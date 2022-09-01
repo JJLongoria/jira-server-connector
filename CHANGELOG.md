@@ -41,6 +41,12 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+- **Implemented all Attachment Endpoints (`/rest/api/latest/component`)**:
 
+    - `/rest/api/latest/component` (POST)
+    - `/rest/api/latest/component/{id}` (GET, PUT, DELETE)
+    - `/rest/api/latest/component/{id}/relatedIssueCounts` (GET)
+
+---
 
 
