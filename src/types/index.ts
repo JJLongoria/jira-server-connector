@@ -149,6 +149,7 @@ export interface PageOptions {
     maxResults?: number;
     startAt?: number;
     orderBy?: string;
+    expand?: string;
 }
 
 export class Page<T> {
@@ -157,6 +158,10 @@ export class Page<T> {
     total: number = 0;
     isLast: boolean = true;
     values: T[] = [];
+}
+
+export interface Self {
+    self: string;
 }
 
 export interface PermissionsOutput {
@@ -221,4 +226,44 @@ export interface ApplicationRole {
     userCountDescription: string;
     hasUnlimitedSeats: boolean;
     platform: boolean;
+}
+
+export interface ListWrapper<T> {
+    size: number;
+    'max-results'?: number;
+    items: T[];
+}
+
+export interface Group extends Self {
+    name: string;
+}
+
+export interface Attachment extends Self {
+    filename: string;
+    created: string;
+    size: number;
+    mimeType: string;
+    properties: any;
+    content: string;
+    thumbnail: string;
+}
+
+export interface AttachmentMeta {
+    enabled: boolean;
+    uploadLimit?: number;
+}
+
+export interface User extends Self {
+    key: string;
+    name: string;
+    emailAddress: string;
+    avatarUrls: { [key: string]: string };
+    displayName: string;
+    active: boolean;
+    deleted: boolean;
+    timeZone: string;
+    locale: string;
+    groups: ListWrapper<Group>;
+    applicationRoles: ListWrapper<ApplicationRole>;
+    expand: string;
 }

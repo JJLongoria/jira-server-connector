@@ -1,5 +1,6 @@
 import { ApplicationEndpoint } from "./endpoints/application";
 import { ApplicationRoleEndpoint } from "./endpoints/applicationRole";
+import { AttachmentEndpoint } from "./endpoints/attachment";
 import { PermissionsEndpoint } from "./endpoints/permissions";
 import { Basic, BasicAuth } from "./types";
 
@@ -43,6 +44,11 @@ export class JiraServerConnector {
     applicationRoles: ApplicationRoleEndpoint;
 
     /**
+     * Contains all operations from '/rest/api/latest/attachment/*'.
+     */
+    attachments: AttachmentEndpoint;
+
+    /**
      * Instance new Jira Server Connector with user credentials and Jira host.
      * @param {BasicAuth} auth Basic Authorization info and Jira host 
      */
@@ -51,6 +57,7 @@ export class JiraServerConnector {
         this.permissions = new PermissionsEndpoint(this.auth);
         this.applicationProperties = new ApplicationEndpoint(this.auth);
         this.applicationRoles = new ApplicationRoleEndpoint(this.auth);
+        this.attachments = new AttachmentEndpoint(this.auth);
     }
 
 
