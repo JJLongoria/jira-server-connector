@@ -1,3 +1,4 @@
+import { PermissionsEndpoint } from "./endpoints/permissions";
 import { Basic, BasicAuth } from "./types";
 
 export * from "./types";
@@ -24,15 +25,19 @@ export class JiraServerConnector {
 
     private auth: Basic;
 
+    permissions: PermissionsEndpoint;
+
     /**
      * Instance new Jira Server Connector with user credentials and Jira host.
      * @param {BasicAuth} auth Basic Authorization info and Jira host 
      */
     constructor(auth: BasicAuth) {
         this.auth = new Basic(auth);
+        this.permissions = new PermissionsEndpoint(this.auth);
     }
 
-    
+
+
 }
 
 

@@ -166,3 +166,34 @@ export class Page<T> {
     isLast: boolean = true;
     values: T[] = [];
 }
+
+export interface PermissionsOutput {
+    permisions: { [key: string]: Permission }
+}
+
+export interface UserPermissionsOutput {
+    permisions: { [key: string]: UserPermission }
+}
+
+export interface UserPermissionsOptions {
+    projectKey?: string;
+    projectId?: string;
+    issueKey?: string;
+    issueId?: string;
+}
+
+export interface UserPermission {
+    id: string;
+    key: string;
+    name: string;
+    type: string;
+    description: string;
+    havePermission: boolean;
+}
+
+export interface Permission {
+    key: string;
+    name: string;
+    type: string;
+    description: string;
+}
