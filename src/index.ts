@@ -4,6 +4,7 @@ import { AttachmentEndpoint } from "./endpoints/attachment";
 import { AvatarEndpoint } from "./endpoints/avatar";
 import { ComponentEndpoint } from "./endpoints/component";
 import { ConfigurationEndpoint } from "./endpoints/configuration";
+import { CustomFieldEndpoint } from "./endpoints/customField";
 import { PermissionsEndpoint } from "./endpoints/permissions";
 import { Basic, BasicAuth } from "./types";
 
@@ -67,6 +68,11 @@ export class JiraServerConnector {
     configuration: ConfigurationEndpoint;
 
     /**
+     * Contains all operations from '/rest/api/latest/customFields' and '/rest/api/latest/customFieldOptions''.
+     */
+    customFields: CustomFieldEndpoint;
+
+    /**
      * Instance new Jira Server Connector with user credentials and Jira host.
      * @param {BasicAuth} auth Basic Authorization info and Jira host 
      */
@@ -79,6 +85,7 @@ export class JiraServerConnector {
         this.avatar = new AvatarEndpoint(this.auth);
         this.component = new ComponentEndpoint(this.auth);
         this.configuration = new ConfigurationEndpoint(this.auth);
+        this.customFields = new CustomFieldEndpoint(this.auth);
     }
 
 

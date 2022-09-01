@@ -33,7 +33,7 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-- **Implemented all Attachment Endpoints (`/rest/api/latest/avatar`)**:
+- **Implemented all Avatar Endpoints (`/rest/api/latest/avatar`)**:
 
     - `/rest/api/latest/avatar/{type}/system` (GET)
     - `/rest/api/latest/avatar/{type}/temporary` (POST)
@@ -41,7 +41,7 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-- **Implemented all Attachment Endpoints (`/rest/api/latest/component`)**:
+- **Implemented all Component Endpoints (`/rest/api/latest/component`)**:
 
     - `/rest/api/latest/component` (POST)
     - `/rest/api/latest/component/{id}` (GET, PUT, DELETE)
@@ -49,10 +49,23 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-- **Implemented all Attachment Endpoints (`/rest/api/latest/configuration`)**:
+- **Implemented all Configuration Endpoints (`/rest/api/latest/configuration`)**:
 
     - `/rest/api/latest/configuration` (GET)
 
 ---
+
+- **Implemented all Custom Field Options Endpoints (`/rest/api/latest/customFieldOption`)**:
+
+    - `/rest/api/latest/customFieldOption/{id}` (GET)
+
+---
+
+- **Implemented all Custom Field Endpoints (`/rest/api/latest/customFields`)**:
+
+    - `/rest/api/latest/customFields` (GET, DELETE)
+
+---
+
 
 

@@ -146,8 +146,8 @@ export interface JiraErrorData {
 }
 
 export interface PageOptions {
-    maxResults?: number;
-    startAt?: number;
+    maxResults: number;
+    startAt: number;
     orderBy?: string;
     expand?: string;
 }
@@ -161,11 +161,11 @@ export class Page<T> {
     self: string = '';
     nextPage: string = '';
 
-    
+
 }
 
 export interface Self {
-    self: string;
+    self?: string;
 }
 
 export interface PermissionsOutput {
@@ -331,5 +331,44 @@ export interface ConfigurationTimeTracking {
     workingDaysPerWeek: 5;
     timeFormat?: 'pretty' | 'days' | 'hours';
     defaultUnit?: 'minute' | 'hour' | 'day' | 'week';
-    
+
+}
+
+export interface CustomFieldOption extends Self {
+    value: string;
+    disabled: boolean;
+}
+
+export interface CustomField extends Self {
+    id: string;
+    name: string;
+    description: string;
+    type: string;
+    searchKey: string;
+    projectIds: number[];
+    issueTypeIds: string[];
+    numericId: number;
+    isLocked: boolean;
+    isManaged: boolean;
+    isAllProjects: boolean;
+    isTrusted: boolean;
+    projectsCount: number;
+    screensCount: number;
+    lastValueUpdate: string;
+    issuesWithValue: number;
+}
+
+export interface ListFieldOptions {
+    search?: string;
+    projectId?: string;
+    screenIds?: string;
+    types?: string;
+    lastValueUpdate?: number;
+    pageOptions?: PageOptions;
+}
+
+export interface DeletedFieldsOutput {
+    message: string;
+    deletedCustomFields: string[];
+    notDeletedCustomFields: string[];
 }
