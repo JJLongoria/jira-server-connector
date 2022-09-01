@@ -31,4 +31,16 @@ All notable changes to this project will be documented in this file.
     - `/rest/api/latest/attachment/{id}` (GET, DELETE)
     - `/rest/api/latest/attachment/meta` (GET)
 
+---
+
+- **Implemented all Attachment Endpoints (`/rest/api/latest/avatar`)**:
+
+    - `/rest/api/latest/avatar/{type}/system` (GET)
+    - `/rest/api/latest/avatar/{type}/temporary` (POST)
+    - `/rest/api/latest/avatar/{type}/temporaryCrop` (POST)
+
+---
+
+
+
 

@@ -267,3 +267,25 @@ export interface User extends Self {
     applicationRoles: ListWrapper<ApplicationRole>;
     expand: string;
 }
+
+export interface SystemAvatars {
+    system: Avatar[]
+}
+
+export interface Avatar {
+    id: string;
+    owner: string;
+    isSystemAvatar: boolean;
+    isSelected: boolean;
+    isDeletable: boolean;
+    urls: { [key: string]: string };
+    selected: boolean;
+}
+
+export interface AvatarCroping {
+    cropperWidth: number;
+    cropperOffsetX: number;
+    cropperOffsetY: number;
+    url?: string;
+    needsCropping: boolean;
+}

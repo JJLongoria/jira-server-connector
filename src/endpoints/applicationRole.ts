@@ -33,7 +33,7 @@ export class ApplicationRoleEndpoint extends EndpointService {
         const request = this.doPut().asJson().withBody(rolesToUpdate);
         try {
             if (ifMacth) {
-                request.addQueryParam('If-Match', ifMacth);
+                request.addHeader('If-Match', ifMacth);
             }
             const result = await request.execute();
             return result.data as ApplicationRole[];
@@ -72,7 +72,7 @@ export class ApplicationRoleEndpoint extends EndpointService {
         }).asJson().withBody(roleToUpdate);
         try {
             if (ifMacth) {
-                request.addQueryParam('If-Match', ifMacth);
+                request.addHeader('If-Match', ifMacth);
             }
             const result = await request.execute();
             return result.data as ApplicationRole;
