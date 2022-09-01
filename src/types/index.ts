@@ -242,6 +242,8 @@ export interface ListWrapper<T> {
 
 export interface Group extends Self {
     name: string;
+    users: ListWrapper<User>;
+    expand: string;
 }
 
 export interface Attachment extends Self {
@@ -553,4 +555,69 @@ export interface FilterColumn {
 
 export interface ShareScope {
     scope: 'GLOBAL' | 'AUTHENTICATED' | 'PRIVATE';
+}
+
+export interface GroupMemberOptions {
+    groupname?: string;
+    includeInactiveUsers?: boolean;
+    startAt: number;
+    maxResults: number;
+}
+
+export interface FindGroupsOptions {
+    query: string;
+    exclude?: string;
+    maxResults?: number;
+    userName?: string;
+}
+
+export interface GroupSuggestions {
+    header: string;
+    total: number;
+    groups: GroupSuggestion[];
+}
+
+export interface GroupSuggestion {
+    name: string;
+    html: string;
+    labels?: GroupSuggestionLabel[];
+}
+
+export interface GroupSuggestionLabel {
+    text: string;
+    title: string;
+    type: 'ADMIN' | 'SINGLE' | 'MULTIPLE';
+}
+
+export interface FindUserAndGroupsOptions {
+    query: string;
+    showAvatar?: boolean;
+    maxResults?: number;
+    fieldId?: string;
+    projectId?: string;
+    issueTypeId?: string;
+}
+
+export interface UserAndGroups {
+    users: UsersSuggestion;
+    groups: GroupsSuggestion;
+}
+
+export interface UsersSuggestion {
+    users: UserSuggestion[];
+    total: number;
+    header: string;
+}
+
+export interface UserSuggestion {
+    name: string;
+    key: string;
+    displayName: string;
+    avatarUrl: string;
+}
+
+export interface GroupsSuggestion {
+    groups: GroupSuggestion[];
+    total: number;
+    header: string;
 }

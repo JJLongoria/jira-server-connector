@@ -118,7 +118,27 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+- **Implemented all Groups Endpoints (`/rest/api/latest/group` `/rest/api/latest/groups/picker`, `/rest/api/latest/groupuserpicker`)**:
 
+    - `/rest/api/latest/group` (POST, DELETE)
+
+    ---
+
+    - `/rest/api/latest/groups/member` (GET)
+
+    ---
+
+    - `/rest/api/latest/groups/user` (POST, DELETE)
+
+    ---
+
+    - `/rest/api/latest/groups/picker` (GET)
+
+    ---
+
+    - `/rest/api/latest/groupuserpicker` (GET)
+
+---
 
 
 
