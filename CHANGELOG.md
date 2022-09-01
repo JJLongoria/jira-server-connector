@@ -67,5 +67,16 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+- **Implemented all Dashboards Endpoints (`/rest/api/latest/dashboard`)**:
+
+    - `/rest/api/latest/dashboard` (GET)
+    - `/rest/api/latest/dashboard/{id}` (GET)
+
+    ---
+
+    - `/rest/api/latest/dashboard/{dashboardId}/items/{itemId}/properties` (GET)
+    - `/rest/api/latest/dashboard/{dashboardId}/items/{itemId}/properties/{propertyKey}` (GET, PUT, DELETE)
+
+---
 
 

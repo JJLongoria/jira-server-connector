@@ -11,7 +11,7 @@ export class ConfigurationEndpoint extends EndpointService {
 
     /**
     * Returns the information if the optional features in Jira are enabled or disabled. If the time tracking is enabled, it also returns the detailed information about time tracking configuration
-    * @returns {Promise<Configuration>} Promise with the requested system avatars data
+    * @returns {Promise<Configuration>} Promise with the requested configuration data
     */
     async get(): Promise<Configuration> {
         const request = this.doGet();

@@ -372,3 +372,31 @@ export interface DeletedFieldsOutput {
     deletedCustomFields: string[];
     notDeletedCustomFields: string[];
 }
+
+export interface DashboardsOutput {
+    startAt: number;
+    maxResults: number;
+    total: number;
+    prev: string;
+    next: string;
+    dashboards: Dashboard[];
+}
+
+export interface Dashboard extends Self {
+    id: string;
+    name: string;
+    view: string;
+}
+
+export interface EntityPropertyKeys {
+    keys: EntityPropertyKey[];
+}
+
+export interface EntityPropertyKey extends Self {
+    key: string; 
+}
+
+export interface EntityProperty {
+    key: string;
+    value: any;
+}

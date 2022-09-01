@@ -33,7 +33,8 @@ export class CustomFieldEndpoint extends EndpointService {
     */
      async list(options: ListFieldOptions): Promise<Page<CustomField>> {
         const request = this.doGet({
-            param: 'customFields'
+            param: 'customFields',
+            pageOptions: options.pageOptions
         });
         try {
             this.processOptions(request, options);
