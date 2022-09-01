@@ -1,3 +1,4 @@
+import { ApplicationEndpoint } from "./endpoints/application";
 import { PermissionsEndpoint } from "./endpoints/permissions";
 import { Basic, BasicAuth } from "./types";
 
@@ -25,7 +26,15 @@ export class JiraServerConnector {
 
     private auth: Basic;
 
+    /**
+     * Contains all operations from '/rest/api/latest/mypermissions' and '/rest/api/latest/permissions'.
+     */
     permissions: PermissionsEndpoint;
+
+    /**
+     * Contains all operations from '/rest/api/latest/application-properties/*'.
+     */
+    applicationProperties: ApplicationEndpoint;
 
     /**
      * Instance new Jira Server Connector with user credentials and Jira host.
@@ -34,6 +43,7 @@ export class JiraServerConnector {
     constructor(auth: BasicAuth) {
         this.auth = new Basic(auth);
         this.permissions = new PermissionsEndpoint(this.auth);
+        this.applicationProperties = new ApplicationEndpoint(this.auth);
     }
 
 

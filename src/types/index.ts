@@ -197,3 +197,31 @@ export interface Permission {
     type: string;
     description: string;
 }
+
+export interface ApplicationPropertiesOptions {
+    key?: string;
+    permissionLevel?: string;
+    keyFilter?: string;
+}
+
+export interface ApplicationPropertyInput {
+    value?: string;
+    name?: string;
+    desc?: string;
+    type?: string;
+    defaultValue?: string;
+    example?: string;
+    allowedValues?: string[];
+}
+
+export interface ApplicationProperty {
+    id: string;
+    key: string;
+    value: string;
+    name: string;
+    desc: string;
+    type: string;
+    defaultValue: string;
+    example?: string;
+    allowedValues?: string[];
+}
