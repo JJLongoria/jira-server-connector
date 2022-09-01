@@ -7,6 +7,7 @@ import { ConfigurationEndpoint } from "./endpoints/configuration";
 import { CustomFieldEndpoint } from "./endpoints/customField";
 import { DashboardEndpoint } from "./endpoints/dashboard";
 import { EmailTemplatesEndpoint } from "./endpoints/emailTemplates";
+import { FieldEndpoint } from "./endpoints/field";
 import { PermissionsEndpoint } from "./endpoints/permissions";
 import { Basic, BasicAuth } from "./types";
 
@@ -62,7 +63,7 @@ export class JiraServerConnector {
     /**
      * Contains all operations from '/rest/api/latest/component/*'.
      */
-    component: ComponentEndpoint;
+    components: ComponentEndpoint;
 
     /**
      * Contains all operations from '/rest/api/latest/configuration/*'.
@@ -82,7 +83,14 @@ export class JiraServerConnector {
     /**
      * Contains all operations from '/rest/api/latest/email-templates'.
      */
-    emailTemplates: EmailTemplatesEndpoint
+    emailTemplates: EmailTemplatesEndpoint;
+
+    /**
+     * Contains all operations from '/rest/api/latest/field'.
+     */
+     fields: FieldEndpoint;
+
+
     /**
      * Instance new Jira Server Connector with user credentials and Jira host.
      * @param {BasicAuth} auth Basic Authorization info and Jira host 
@@ -94,11 +102,12 @@ export class JiraServerConnector {
         this.applicationRoles = new ApplicationRoleEndpoint(this.auth);
         this.attachments = new AttachmentEndpoint(this.auth);
         this.avatar = new AvatarEndpoint(this.auth);
-        this.component = new ComponentEndpoint(this.auth);
+        this.components = new ComponentEndpoint(this.auth);
         this.configuration = new ConfigurationEndpoint(this.auth);
         this.customFields = new CustomFieldEndpoint(this.auth);
         this.dashboards = new DashboardEndpoint(this.auth);
         this.emailTemplates = new EmailTemplatesEndpoint(this.auth);
+        this.fields = new FieldEndpoint(this.auth);
     }
 
 

@@ -358,6 +358,16 @@ export interface CustomField extends Self {
     issuesWithValue: number;
 }
 
+export interface CustomFieldDefinition {
+    id: string;
+    name: string;
+    description: string;
+    type: string;
+    searchKey: string;
+    projectIds: number[];
+    issueTypeIds: string[];
+}
+
 export interface ListFieldOptions {
     search?: string;
     projectId?: string;
@@ -399,4 +409,23 @@ export interface EntityPropertyKey extends Self {
 export interface EntityProperty {
     key: string;
     value: any;
+}
+
+export interface Field {
+    id: string;
+    name: string;
+    custom: boolean;
+    orderable: boolean;
+    navigable: boolean;
+    searchable: boolean;
+    clauseNames: string[];
+    schema: FieldSchema;
+}
+
+export interface FieldSchema {
+    type: string;
+    items: string;
+    system: string;
+    custom: string;
+    customId: number;
 }

@@ -88,6 +88,14 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+- **Implemented all Field Endpoints (`/rest/api/latest/field`)**:
+
+    - `/rest/api/latest/field` (GET, POST)
+
+---
+
+
+
 
 
 
