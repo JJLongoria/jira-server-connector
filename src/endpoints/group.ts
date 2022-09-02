@@ -1,7 +1,7 @@
 import { Basic, EndpointService, FindGroupsOptions, FindUserAndGroupsOptions, Group, GroupMemberOptions, GroupSuggestions, Page, User, UserAndGroups } from "../types";
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/group/user' and '/rest/api/latest/groups/member'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/group/user' and '/rest/api/latest/groups/member'
  */
 export class GroupMemberEndpoint extends EndpointService {
 
@@ -72,7 +72,7 @@ export class GroupMemberEndpoint extends EndpointService {
 }
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/group', '/rest/api/latest/groups' and '/rest/api/latest/groupuserpicker'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/group', '/rest/api/latest/groups' and '/rest/api/latest/groupuserpicker'
  */
 export class GroupEndpoint extends EndpointService {
 

@@ -1,7 +1,7 @@
 import { Basic, EndpointService } from "../types";
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/email-templates'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/email-templates'
  */
 export class EmailTemplatesEndpoint extends EndpointService {
 

@@ -1,7 +1,7 @@
 import { Basic, Configuration, EndpointService } from "../types";
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/configuration'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/configuration'
  */
 export class ConfigurationEndpoint extends EndpointService {
 

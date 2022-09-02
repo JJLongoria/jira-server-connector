@@ -1,7 +1,7 @@
 import { Basic, Comment, CommentsOutput, EditMeta, EndpointService, Issue, IssueCommentsOptions, IssueLink, IssueLinks, IssueNotification, IssueOptions, IssueRemoteLink, IssueTransition, IssueTransitions, IssueUpdate, IssueVotes, IssueWatchers, IssueWorklog, IssueCreateWorklogsOptions, IssueWorklogsOutput, IssueUpdateWorklogsOptions, CreateMeta, Page, FieldMeta, IssuePickerOutput, IssuePickerOptions, Attachment } from "../types";
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/issue/{issueIdOrKey}/comment'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/issue/{issueIdOrKey}/comment'
  */
 export class IssueCommentEndpoint extends EndpointService {
 
@@ -99,7 +99,7 @@ export class IssueCommentEndpoint extends EndpointService {
 }
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/issue/{issueIdOrKey}/editmeta'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/issue/{issueIdOrKey}/editmeta'
  */
 export class IssueEditMetaEndpoint extends EndpointService {
 
@@ -124,7 +124,7 @@ export class IssueEditMetaEndpoint extends EndpointService {
 }
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/issue/{issueIdOrKey}/remotelink'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/issue/{issueIdOrKey}/remotelink'
  */
 export class IssueRemoteLinkEndpoint extends EndpointService {
 
@@ -236,7 +236,7 @@ export class IssueRemoteLinkEndpoint extends EndpointService {
 }
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/issue/{issueIdOrKey}/transitions'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/issue/{issueIdOrKey}/transitions'
  */
 export class IssueTransitionEndpoint extends EndpointService {
 
@@ -294,7 +294,7 @@ export class IssueTransitionEndpoint extends EndpointService {
 }
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/issue/{issueIdOrKey}/votes'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/issue/{issueIdOrKey}/votes'
  */
 export class IssueVotesEndpoint extends EndpointService {
 
@@ -347,7 +347,7 @@ export class IssueVotesEndpoint extends EndpointService {
 }
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/issue/{issueIdOrKey}/watchers'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/issue/{issueIdOrKey}/watchers'
  */
 export class IssueWatchersEndpoint extends EndpointService {
 
@@ -404,7 +404,7 @@ export class IssueWatchersEndpoint extends EndpointService {
 }
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/issue/{issueIdOrKey}/worklog'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/issue/{issueIdOrKey}/worklog'
  */
 export class IssueWorklogEndpoint extends EndpointService {
 
@@ -502,7 +502,7 @@ export class IssueWorklogEndpoint extends EndpointService {
 }
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/issue/createmeta'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/issue/createmeta'
  */
 export class IssueCreateMetaEndpoint extends EndpointService {
 
@@ -564,7 +564,7 @@ export class IssueCreateMetaEndpoint extends EndpointService {
 }
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/issue/{issueIdOrKey}/attachments'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/issue/{issueIdOrKey}/attachments'
  */
 export class IssueAttachmentEndpoint extends EndpointService {
 
@@ -589,7 +589,7 @@ export class IssueAttachmentEndpoint extends EndpointService {
 }
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/issue/{issueIdOrKey}/subtask'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/issue/{issueIdOrKey}/subtask'
  */
 export class IssueSubtasksEndpoint extends EndpointService {
 
@@ -614,7 +614,7 @@ export class IssueSubtasksEndpoint extends EndpointService {
 
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/issue'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/issue'
  */
 export class IssueEndpoint extends EndpointService {
 

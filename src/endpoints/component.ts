@@ -1,7 +1,7 @@
 import { Basic, Component, EndpointService, IssuesCount } from "../types";
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/component''
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/component''
  */
  export class ComponentEndpoint extends EndpointService {
 

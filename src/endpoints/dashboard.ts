@@ -1,7 +1,7 @@
 import { Basic, Dashboard, DashboardsOutput, EndpointService, EntityProperty, EntityPropertyKeys } from "../types";
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/dashboard/{dashboardId}/items/{itemId}/properties'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/dashboard/{dashboardId}/items/{itemId}/properties'
  */
 export class DashboardItemPropertiesEndpoint extends EndpointService {
 
@@ -75,7 +75,7 @@ export class DashboardItemPropertiesEndpoint extends EndpointService {
 }
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/dashboard/{dashboardId}/items'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/dashboard/{dashboardId}/items'
  */
 export class DashboardItemEndpoint extends EndpointService {
 
@@ -95,7 +95,7 @@ export class DashboardItemEndpoint extends EndpointService {
 }
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/dashboard'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/dashboard'
  */
 export class DashboardEndpoint extends EndpointService {
 

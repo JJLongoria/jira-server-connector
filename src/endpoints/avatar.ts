@@ -1,7 +1,7 @@
 import { Avatar, AvatarCroping, Basic, EndpointService, SystemAvatars } from "../types";
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/avatar'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/avatar'
  */
 export class AvatarEndpoint extends EndpointService {
 
@@ -40,7 +40,7 @@ export class AvatarEndpoint extends EndpointService {
     async temporary(type: string, filename: string, size: number): Promise<AvatarCroping> {
         const request = this.doPost({
             param: type + '/temporary'
-        });
+        }).asFile().withBody(filename);
         try {
             request.addQueryParam('filename', filename);
             request.addQueryParam('size', size);

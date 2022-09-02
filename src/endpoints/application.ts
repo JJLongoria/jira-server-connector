@@ -1,7 +1,7 @@
 import { ApplicationPropertiesOptions, ApplicationProperty, Basic, EndpointService } from "../types";
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/application-properties'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/application-properties'
  */
 export class ApplicationEndpoint extends EndpointService {
 

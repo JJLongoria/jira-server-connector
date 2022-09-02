@@ -1,7 +1,7 @@
 import { Basic, EndpointService, IssueSecuritySchemes, SecurityScheme } from "../types";
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/issuesecurityschemes'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/issuesecurityschemes'
  */
 export class IssueSecuritySchemeEndpoint extends EndpointService {
 

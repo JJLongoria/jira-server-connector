@@ -1,7 +1,7 @@
 import { Basic, EndpointService, PermissionsOutput, UserPermissionsOptions, UserPermissionsOutput } from "../types";
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/permissions' and '/rest/api/latest/mypermissions'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/permissions' and '/rest/api/latest/mypermissions'
  */
 export class PermissionsEndpoint extends EndpointService {
 

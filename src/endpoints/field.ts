@@ -1,7 +1,7 @@
 import { Basic, CustomFieldDefinition, EndpointService, Field } from "../types";
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/field'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/field'
  */
  export class FieldEndpoint extends EndpointService {
 

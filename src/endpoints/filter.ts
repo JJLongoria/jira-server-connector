@@ -1,7 +1,7 @@
 import { Basic, EndpointService, Filter, FilterColumn, FilterPermission, ShareScope } from "../types";
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/filter/favourite'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/filter/favourite'
  */
 export class FilterFavouriteEndpoint extends EndpointService {
 
@@ -30,7 +30,7 @@ export class FilterFavouriteEndpoint extends EndpointService {
 }
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/filter/defaultShareScope'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/filter/defaultShareScope'
  */
 export class FilterDefaultShareScopeEndpoint extends EndpointService {
 
@@ -70,7 +70,7 @@ export class FilterDefaultShareScopeEndpoint extends EndpointService {
 }
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/filter/{id}/permission'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/filter/{id}/permission'
  */
 export class FilterPermissionsEndpoint extends EndpointService {
 
@@ -143,7 +143,7 @@ export class FilterPermissionsEndpoint extends EndpointService {
 }
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/filter/{id}/columns'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/filter/{id}/columns'
  */
 export class FilterColumnsEndpoint extends EndpointService {
 
@@ -197,7 +197,7 @@ export class FilterColumnsEndpoint extends EndpointService {
 }
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/filter'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/filter'
  */
 export class FilterEndpoint extends EndpointService {
 

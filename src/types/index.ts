@@ -435,7 +435,7 @@ export interface FieldSchema {
 }
 
 
-export interface IssueType {
+export interface IssueType extends Self {
     id?: string;
     description: string;
     iconUrl?: string;
@@ -1024,4 +1024,16 @@ export interface SecuritySchemeLevel extends Self {
     id: string;
     name: string;
     description: string;
+}
+
+export interface IssueTypeCreate {
+    name: string;
+    description: string;
+    type: 'subtask' | '';
+}
+
+export interface IssueTypeUpdate {
+    name: string;
+    description: string;
+    avatarId: number;
 }

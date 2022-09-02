@@ -1,7 +1,7 @@
 import { Basic, CustomField, CustomFieldOption, DeletedFieldsOutput, EndpointService, ListFieldOptions, Page } from "../types";
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/customFieldOption' and '/rest/api/latest/customFields'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/customFieldOption' and '/rest/api/latest/customFields'
  */
 export class CustomFieldEndpoint extends EndpointService {
 

@@ -2,7 +2,7 @@ import { Basic, EndpointService, IssueLink, IssueLinkType, IssueLinkTypes } from
 
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/issueLinkTypes'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/issueLinkTypes'
  */
 export class IssueLinkTypesEndpoint extends EndpointService {
 
@@ -94,7 +94,7 @@ export class IssueLinkTypesEndpoint extends EndpointService {
 }
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/issueLink'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/issueLink'
  */
 export class IssueLinkEndpoint extends EndpointService {
 

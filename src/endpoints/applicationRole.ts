@@ -1,7 +1,7 @@
 import { ApplicationRole, Basic, EndpointService } from "../types";
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/applicationrole'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/applicationrole'
  */
 export class ApplicationRoleEndpoint extends EndpointService {
 

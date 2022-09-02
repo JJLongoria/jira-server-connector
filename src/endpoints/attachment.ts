@@ -1,7 +1,7 @@
 import { Attachment, AttachmentMeta, Basic, EndpointService, PermissionsOutput, UserPermissionsOptions, UserPermissionsOutput } from "../types";
 
 /**
- * Class to manage and expose all endpoits and operations below '/rest/api/latest/attachment'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/attachment'
  */
 export class AttachmentEndpoint extends EndpointService {
 
