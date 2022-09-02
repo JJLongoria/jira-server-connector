@@ -678,22 +678,22 @@ export interface IssueTransition {
     id?: string;
     name: string;
     opsbarSequence: number;
-    to: IssueStatus;
+    to: Status;
     fields: { [key: string]: FieldMeta };
     expand?: string;
 }
 
 
-export interface IssueStatus extends Self {
+export interface Status extends Self {
     id?: string;
     statusColor: string;
     description: string;
     iconUrl: string;
     name: string;
-    statusCategory: IssueStatusCategory;
+    statusCategory: StatusCategory;
 }
 
-export interface IssueStatusCategory extends Self {
+export interface StatusCategory extends Self {
     id?: string;
     key: string;
     colorName: string;
@@ -966,4 +966,62 @@ export interface IssuePickerSection {
     id: string;
     msg: string;
     issues: IssuePicker[];
+}
+
+export interface IssueLink {
+    type?: IssueLinkType;
+    inwardIssue?: IssueReference;
+    outwardIssue?: IssueReference;
+    comment?: Comment;
+}
+
+export interface IssueReference {
+    id?: string;
+    key: string;
+    fields?: IssueReferenceFields;
+    user?: User;
+}
+
+export interface IssueReferenceFields {
+    summary?: string;
+    status: Status;
+    issuetype?: IssueType;
+    priority?: Priority;
+}
+
+export interface Priority {
+    id?: string;
+    statusColor?: string;
+    description: string;
+    iconUrl: string;
+    name: string;
+}
+
+export interface IssueLinkTypes {
+    issueLinkTypes: IssueLinkType[];
+}
+
+export interface IssueLinkType extends Self {
+    id?: string;
+    name: string;
+    inward: string;
+    outward: string;
+}
+
+export interface IssueSecuritySchemes {
+    issueSecuritySchemes: SecurityScheme[];
+}
+
+export interface SecurityScheme extends Self {
+    id: string;
+    name: string;
+    description: string;
+    defaultSecurityLevelId: number;
+    levels: SecuritySchemeLevel[];
+}
+
+export interface SecuritySchemeLevel extends Self {
+    id: string;
+    name: string;
+    description: string;
 }

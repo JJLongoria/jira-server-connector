@@ -169,6 +169,18 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+- **Implemented all Issue Links Endpoints (`/rest/api/latest/issueLink` and `/rest/api/latest/groups/issueLinkType`)**:
+
+    - `/rest/api/latest/issueLink` (POST)
+    - `/rest/api/latest/issueLink/{linkId}` (GET, DELETE)
+
+    ---
+
+    - `/rest/api/latest/issueLinkType` (GET, POST)
+    - `/rest/api/latest/issueLinkType/{issueLinkTypeId}` (GET, PUT, DELETE)
+
+
+---
 
 
 
