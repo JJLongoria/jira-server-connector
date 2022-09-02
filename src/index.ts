@@ -10,6 +10,7 @@ import { EmailTemplatesEndpoint } from "./endpoints/emailTemplates";
 import { FieldEndpoint } from "./endpoints/field";
 import { FilterEndpoint } from "./endpoints/filter";
 import { GroupEndpoint } from "./endpoints/group";
+import { IssueEndpoint } from "./endpoints/issue";
 import { PermissionsEndpoint } from "./endpoints/permissions";
 import { Basic, BasicAuth } from "./types";
 
@@ -100,7 +101,12 @@ export class JiraServerConnector {
     /**
      * Contains all operations from '/rest/api/latest/group', '/rest/api/latest/groups' and '/rest/api/latest/groupuserpicker'
      */
-     groups: GroupEndpoint;
+    groups: GroupEndpoint;
+
+    /**
+     * Contains all operations from '/rest/api/latest/issue'
+     */
+    issues: IssueEndpoint;
 
 
     /**
@@ -122,6 +128,7 @@ export class JiraServerConnector {
         this.fields = new FieldEndpoint(this.auth);
         this.filters = new FilterEndpoint(this.auth);
         this.groups = new GroupEndpoint(this.auth);
+        this.issues = new IssueEndpoint(this.auth);
     }
 
 

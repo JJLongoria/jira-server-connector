@@ -16,4 +16,4 @@ The library is designed to make this use really easy. All endpoints and operatio
 
 This is **not an Official Atlassian Project** but *use and work* with the **Atlassian Official REST API** developed for Jira Server.
 
-Now Stil in BETA Version because is not fully tested.
+Now Stil in BETA Version because is not fully tested and some operations are not implemented.

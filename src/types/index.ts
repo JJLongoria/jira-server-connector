@@ -621,3 +621,349 @@ export interface GroupsSuggestion {
     total: number;
     header: string;
 }
+
+export interface IssueUpdate {
+    transition?: IssueTransition;
+    fields?: { [key: string]: any };
+    update?: { [key: string]: any[] };
+    historyMetadata?: HistoryMetadata;
+    properties?: EntityProperty[];
+
+}
+
+export interface IssueLink extends Self {
+    id: string;
+    key: string;
+}
+
+export interface IssueLinks {
+    issues: IssueLink[];
+}
+
+export interface IssueOptions {
+    fields?: string;
+    expand?: string;
+    properties?: string;
+    updateHistory?: string;
+}
+
+export interface Issue {
+    expand?: string;
+    id?: string;
+    key: string;
+    fields?: { [key: string]: any };
+    renderedFields?: { [key: string]: any };
+    properties: {
+        properties: { [key: string]: string };
+    };
+    names: { [key: string]: string };
+    schema: { [key: string]: JsonType };
+    transitions: IssueTransition[];
+    operations: LinkGroup[];
+    editmeta: EditMeta;
+    changelog: ChangeLog;
+    versionedRepresentations: any;
+    fieldsToInclude: any;
+}
+
+export interface JsonType {
+    type: string;
+    items?: string;
+    system: string;
+    custom: string;
+    customId: number;
+}
+
+export interface IssueTransition {
+    id?: string;
+    name: string;
+    opsbarSequence: number;
+    to: IssueStatus;
+    fields: { [key: string]: FieldMeta };
+    expand?: string;
+}
+
+
+export interface IssueStatus extends Self {
+    id?: string;
+    statusColor: string;
+    description: string;
+    iconUrl: string;
+    name: string;
+    statusCategory: IssueStatusCategory;
+}
+
+export interface IssueStatusCategory extends Self {
+    id?: string;
+    key: string;
+    colorName: string;
+    name: string;
+}
+
+export interface FieldMeta extends Self {
+    required: boolean;
+    schema: JsonType;
+    name: string;
+    fieldId: string;
+    autoCompleteUrl: string;
+    hasDefaultValue: boolean;
+    operations: string[];
+    allowedValues: any[];
+    defaultValue: any;
+}
+
+export interface EditMeta {
+    fields: { [key: string]: FieldMeta };
+}
+
+export interface LinkGroup {
+    id?: string;
+    styleClass: string;
+    header: SimpleLink;
+    weight: number;
+    links: SimpleLink[];
+    groups: LinkGroup[];
+}
+
+export interface ChangeLog {
+    startAt: number;
+    maxResults: number;
+    total: number;
+    histories: ChangeHistory[];
+}
+
+export interface ChangeHistory {
+    id?: string;
+    author: User;
+    created: string;
+    items: ChangeItem[];
+    historyMetadata: HistoryMetadata;
+}
+
+export interface ChangeItem {
+    field: string;
+    fieldtype: string;
+    from: string;
+    fromString: string;
+    to: string;
+    toString: string;
+}
+
+export interface HistoryMetadata {
+    type: string;
+    description: string;
+    descriptionKey: string;
+    activityDescription: string;
+    activityDescriptionKey: string;
+    emailDescription: string;
+    emailDescriptionKey: string;
+    actor: Participant;
+    generator: Participant;
+    cause: Participant;
+    extraData: { [key: string]: string };
+}
+
+export interface Participant {
+    id: string;
+    displayName: string;
+    displayNameKey: string;
+    type: string;
+    avatarUrl: string;
+    url: string;
+}
+
+export interface FieldOperation {
+
+}
+
+export interface IssueCommentsOptions {
+    startAt?: number;
+    maxResults?: number;
+    orderBy?: string;
+    expand?: string;
+}
+
+export interface Comment extends Self {
+    id?: string;
+    author?: User;
+    body: string;
+    renderedBody?: string;
+    updateAuthor?: User;
+    created?: string;
+    updated?: string;
+    visibility: Visibility;
+    properties?: EntityProperty[];
+
+}
+
+export interface Visibility {
+    type: 'group' | 'role';
+    value: string;
+}
+
+export interface CommentsOutput {
+    startAt: number;
+    maxResults: number;
+    total: number;
+    comments: Comment[];
+}
+
+export interface EditMeta {
+    fields: { [key: string]: FieldMeta };
+}
+
+export interface IssueNotification {
+    subject: string;
+    textBody: string;
+    htmlBody?: string;
+    to: IssueNotificationTo;
+    restrict: IssueNotificationRetrict;
+}
+
+export interface IssueNotificationTo {
+    reporter?: boolean;
+    assignee?: boolean;
+    watchers?: boolean;
+    voters?: boolean;
+    users?: User[];
+    groups?: Group[];
+}
+
+export interface IssueNotificationRetrict {
+    groups?: Group[];
+    permissions?: IssueNotificationPermission[];
+}
+
+export interface IssueNotificationPermission {
+    id: string;
+    key: string;
+}
+
+export interface IssueRemoteLink extends Self {
+    id: number;
+    globalId: string;
+    application: Application;
+    relationship: string;
+    object: RemoteObject;
+}
+
+export interface Application {
+    type: string;
+    name: string;
+}
+
+export interface RemoteObject {
+    url: string;
+    title: string;
+    summary: string;
+    icon: Icon;
+    status: RemoteObjectStatus;
+}
+
+
+export interface RemoteObjectStatus {
+    resolved: boolean;
+    icon: Icon;
+}
+
+export interface Icon {
+    url16x16: string;
+    title: string;
+    link: string;
+}
+
+export interface IssueTransitions {
+    expand: string;
+    transitions: IssueTransition[];
+}
+
+export interface IssueVotes extends Self {
+    votes: number;
+    hasVoted: boolean;
+    voters: User[];
+}
+
+export interface IssueWatchers extends Self {
+    isWatching: false;
+    watchCount: number;
+    watchers: User[];
+}
+
+export interface IssueWorklogsOutput {
+    startAt: number;
+    maxResults: number;
+    total: number;
+    worklogs: IssueWorklog[];
+}
+
+export interface IssueCreateWorklogsOptions {
+    adjustEstimate?: string;
+    newEstimate?: string;
+    reduceBy?: string;
+}
+
+export interface IssueUpdateWorklogsOptions {
+    adjustEstimate?: string;
+    newEstimate?: string;
+}
+
+export interface IssueDeleteWorklogsOptions {
+    adjustEstimate?: string;
+    newEstimate?: string;
+    increaseBy?: string;
+}
+
+export interface IssueWorklog extends Self {
+    id?: string;
+    author?: User;
+    updateAuthor?: User;
+    comment: string;
+    created?: string;
+    updated?: string;
+    visibility: Visibility;
+    started: string;
+    timeSpent?: string;
+    timeSpentSeconds: number;
+    issueId?: string;
+}
+
+export interface CreateMeta extends Self {
+    id?: string;
+    description: string;
+    iconUrl?: string;
+    name: string;
+    subtask: boolean;
+    avatarId?: number;
+    expand?: string;
+    fields?: { [key: string]: FieldMeta };
+
+}
+
+export interface IssuePickerOptions {
+    query?: string;
+    currentJQL?: string;
+    currentIssueKey?: string;
+    currentProjectId?: string;
+    showSubTasks?: boolean;
+    showSubTaskParent?: boolean;
+}
+
+export interface IssuePickerOutput {
+    sections: IssuePickerSection[];
+}
+
+export interface IssuePicker {
+    key: string;
+    keyHtml: string;
+    img: string;
+    summary: string;
+    summaryText: string;
+}
+
+export interface IssuePickerSection {
+    label: string;
+    sub: string;
+    id: string;
+    msg: string;
+    issues: IssuePicker[];
+}

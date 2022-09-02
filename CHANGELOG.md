@@ -118,20 +118,14 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-- **Implemented all Groups Endpoints (`/rest/api/latest/group` `/rest/api/latest/groups/picker`, `/rest/api/latest/groupuserpicker`)**:
+- **Implemented all Groups Endpoints (`/rest/api/latest/group`, `/rest/api/latest/groups/picker` and `/rest/api/latest/groupuserpicker`)**:
 
     - `/rest/api/latest/group` (POST, DELETE)
 
     ---
 
     - `/rest/api/latest/groups/member` (GET)
-
-    ---
-
     - `/rest/api/latest/groups/user` (POST, DELETE)
-
-    ---
-
     - `/rest/api/latest/groups/picker` (GET)
 
     ---
@@ -139,6 +133,42 @@ All notable changes to this project will be documented in this file.
     - `/rest/api/latest/groupuserpicker` (GET)
 
 ---
+
+- **Implemented all Issues Endpoints (`/rest/api/latest/issue`)**:
+
+    - `/rest/api/latest/issue/bulk` (POST)
+
+    ---
+
+    - `/rest/api/latest/issue/{issueIdOrKey}` (DELETE, PUT, GET)
+    - `/rest/api/latest/issue/{issueIdOrKey}/archive` (PUT)
+    - `/rest/api/latest/issue/{issueIdOrKey}/assignee` (PUT)
+    - `/rest/api/latest/issue/{issueIdOrKey}/comment` (GET, POST)
+    - `/rest/api/latest/issue/{issueIdOrKey}/comment/{commentId}` (GET, PUT, DELETE)
+    - `/rest/api/latest/issue/{issueIdOrKey}/editmeta` (GET)
+    - `/rest/api/latest/issue/{issueIdOrKey}/notify` (POST)
+    - `/rest/api/latest/issue/{issueIdOrKey}/remotelink` (GET, POST, DELETE)
+    - `/rest/api/latest/issue/{issueIdOrKey}/remotelink/{linkId}` (GET, PUT, DELETE)
+    - `/rest/api/latest/issue/{issueIdOrKey}/restore` (PUT)
+    - `/rest/api/latest/issue/{issueIdOrKey}/transitions` (GET, POST)
+    - `/rest/api/latest/issue/{issueIdOrKey}/votes` (GET, POST, DELETE)
+    - `/rest/api/latest/issue/{issueIdOrKey}/watchers` (GET, POST, DELETE)
+    - `/rest/api/latest/issue/{issueIdOrKey}/worklog` (GET, POST)
+    - `/rest/api/latest/issue/{issueIdOrKey}/worklog/{worklogId}` (GET, PUT, DELETE)
+    - `/rest/api/latest/issue/{issueIdOrKey}/attachments` (POST)
+    - `/rest/api/latest/issue/{issueIdOrKey}/subtask` (GET)
+
+    ---
+
+    - `/rest/api/latest/issue/createmeta/{projectIdOrKey}/issuetypes` (GET)
+    - `/rest/api/latest/issue/createmeta/{projectIdOrKey}/issuetypes/{issueTypeId}` (GET)
+
+    ---
+
+    - `/rest/api/latest/issue/picker` (GET)
+
+---
+
 
 
 
