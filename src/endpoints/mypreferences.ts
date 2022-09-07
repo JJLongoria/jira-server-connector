@@ -45,7 +45,7 @@ export class MyPreferencesEndpoint extends EndpointService {
      * Sets preference of the currently logged in user. 
      * @param {string} key Key of the preference to be setted
      * @param {string} value Value of the preference to be setted
-     * @returns {Promise<string>} Promise with the requested preference data
+     * @returns {Promise<string>} Promise with the updated preference data
      */
     async set(key: string, value: string): Promise<string> {
         const request = this.doPut().withBody(value);
