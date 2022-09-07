@@ -1072,3 +1072,55 @@ export interface AutoCompleteSuggestion {
     value: string;
     displayName: string;
 }
+
+export interface NotificationScheme extends Self {
+    expand: string;
+    id: number;
+    name: string;
+    description: string;
+    notificationSchemeEvents: NotificationSchemeEvent[];
+}
+
+export interface NotificationSchemeEvent{
+    event: NotificationEvent;
+    notifications: CustomFieldValueNotification[] | EmailNotification[] | GroupNotification[] | ProjectRoleNotification[] | RoleNotification[] | UserNotification[];
+
+}
+
+export interface NotificationEvent{
+    id: number;
+    type: string;
+    description: string;
+    templateEvent: NotificationEvent;
+}
+
+export interface Notification{
+    id: number;
+    notificationType: string;
+    parameter: string;
+    expand: string;
+}
+
+export interface CustomFieldValueNotification extends Notification{
+    field: Field;
+}
+
+export interface EmailNotification extends Notification{
+    emailAddress: string;
+}
+
+export interface GroupNotification extends Notification{
+    group: Group;
+}
+
+export interface ProjectRoleNotification extends Notification{
+    projectRole: ProjectRole;
+}
+
+export interface RoleNotification extends Notification{
+
+}
+
+export interface UserNotification extends Notification{
+    user: User;
+}

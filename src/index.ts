@@ -18,6 +18,8 @@ import { IssueTypeSchemeEndpoint } from "./endpoints/issueTypeScheme";
 import { JQLEndpoint } from "./endpoints/jql";
 import { LicenseEndpoint } from "./endpoints/license";
 import { MyPreferencesEndpoint } from "./endpoints/mypreferences";
+import { MySelfEndpoint } from "./endpoints/myself";
+import { NotificationSchemeEndpoint } from "./endpoints/notificationScheme";
 import { PermissionsEndpoint } from "./endpoints/permissions";
 import { Basic, BasicAuth } from "./types";
 
@@ -148,7 +150,17 @@ export class JiraServerConnector {
     /**
      * Contains all operations from '/rest/api/latest/mypreferences'
      */
-     myPreferences: MyPreferencesEndpoint;
+    myPreferences: MyPreferencesEndpoint;
+
+    /**
+     * Contains all operations from '/rest/api/latest/myself'
+     */
+    mySelf: MySelfEndpoint;
+
+    /**
+     * Contains all operations from '/rest/api/latest/notificationscheme'
+     */
+     notificationScheme: NotificationSchemeEndpoint;
 
 
     /**
@@ -178,6 +190,8 @@ export class JiraServerConnector {
         this.jql = new JQLEndpoint(this.auth);
         this.license = new LicenseEndpoint(this.auth);
         this.myPreferences = new MyPreferencesEndpoint(this.auth);
+        this.mySelf = new MySelfEndpoint(this.auth);
+        this.notificationScheme = new NotificationSchemeEndpoint(this.auth);
     }
 
 
