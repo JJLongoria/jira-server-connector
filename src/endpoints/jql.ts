@@ -26,7 +26,7 @@ export class JQLAutocompleteEndpoint extends EndpointService {
     /**
      * Returns auto complete suggestions for JQL search. 
      * @param {AutoCompleteInput} suggestionsInput The option paramaters to get autocomplete suggestions
-     * @returns {Promise<IssueTypeScheme>} Promise with the requested JQL autocomplete data
+     * @returns {Promise<IssueTypeScheme>} Promise with the requested JQL autocomplete suggestions data
      */
      async suggestions(suggestionsInput: AutoCompleteInput): Promise<AutoCompleteSuggestions> {
         const request = this.doGet({

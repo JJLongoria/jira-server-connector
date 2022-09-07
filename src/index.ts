@@ -15,6 +15,8 @@ import { IssueLinkEndpoint } from "./endpoints/issueLink";
 import { IssueSecuritySchemeEndpoint } from "./endpoints/issueSecuritySchemes";
 import { IssueTypeEndpoint } from "./endpoints/issueType";
 import { IssueTypeSchemeEndpoint } from "./endpoints/issueTypeScheme";
+import { JQLEndpoint } from "./endpoints/jql";
+import { LicenseEndpoint } from "./endpoints/license";
 import { PermissionsEndpoint } from "./endpoints/permissions";
 import { Basic, BasicAuth } from "./types";
 
@@ -118,19 +120,29 @@ export class JiraServerConnector {
     issueLinks: IssueLinkEndpoint;
 
     /**
-     * Contains all operations from '/rest/api/latest/issueLink' and '/rest/api/latest/issuesecurityschemes'
+     * Contains all operations from '/rest/api/latest/issuesecurityschemes'
      */
     issueSecuritySchemes: IssueSecuritySchemeEndpoint;
 
     /**
-     * Contains all operations from '/rest/api/latest/issueLink' and '/rest/api/latest/issuetype'
+     * Contains all operations from '/rest/api/latest/issuetype'
      */
     issueTypes: IssueTypeEndpoint;
 
     /**
-     * Contains all operations from '/rest/api/latest/issueLink' and '/rest/api/latest/issuetype'
+     * Contains all operations from '/rest/api/latest/issuetype'
      */
-     issueTypesScheme: IssueTypeSchemeEndpoint;
+    issueTypesScheme: IssueTypeSchemeEndpoint;
+
+    /**
+     * Contains all operations from '/rest/api/latest/jql'
+     */
+    jql: JQLEndpoint;
+
+    /**
+     * Contains all operations from '/rest/api/latest/license'
+     */
+    license: LicenseEndpoint;
 
 
     /**
@@ -157,6 +169,8 @@ export class JiraServerConnector {
         this.issueSecuritySchemes = new IssueSecuritySchemeEndpoint(this.auth);
         this.issueTypes = new IssueTypeEndpoint(this.auth);
         this.issueTypesScheme = new IssueTypeSchemeEndpoint(this.auth);
+        this.jql = new JQLEndpoint(this.auth);
+        this.license = new LicenseEndpoint(this.auth);
     }
 
 
