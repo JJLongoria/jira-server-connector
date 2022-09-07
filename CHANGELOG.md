@@ -182,6 +182,22 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+- **Implemented all Issue SecuritySchemes Endpoints (`/rest/api/latest/issuesecurityschemes`)**:
+
+    - `/rest/api/latest/issuesecurityschemes` (GET)
+    - `/rest/api/latest/issuesecurityschemes/{schemaId}` (GET)
+
+---
+
+- **Implemented all Issue Type Endpoints (`/rest/api/latest/issuetype`)**:
+
+    - `/rest/api/latest/issuetype` (GET, POST)
+    - `/rest/api/latest/issuetype/{issueTypeId}` (GET, PUT, DELETE)
+    - `/rest/api/latest/issuetype/{issueTypeId}/alternatives` (GET)
+    - `/rest/api/latest/issuetype/{issueTypeId}/avatar` (GET)
+    - `/rest/api/latest/issuetype/{issueTypeId}/avatar/temporary` (POST)
+
+---
 
 
 

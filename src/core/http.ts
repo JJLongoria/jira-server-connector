@@ -9,7 +9,7 @@ export class HTTPRequest {
     private readonly JSON_CONTENT_TYPE = 'application/json';
     private readonly FILE_TYPE = 'multipart/form-data';
     private method: 'GET' | 'POST' | 'PUT' | 'DELETE' = 'GET';
-    private endpoint: string = '';
+    public endpoint: string = '';
     private headers?: { [key: string]: string };
     private queryParams?: { [key: string]: string };
     private body?: any;

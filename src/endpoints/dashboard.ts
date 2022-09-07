@@ -1,4 +1,4 @@
-import { Basic, Dashboard, DashboardsOutput, EndpointService, EntityProperty, EntityPropertyKeys } from "../types";
+import { Basic, Dashboard, DashboardsOutput, EndpointService, EntityProperty, EntityPropertyKeys, Page, PageOptions } from "../types";
 
 /**
  * Class to manage and expose all endpoints and operations below '/rest/api/latest/dashboard/{dashboardId}/items/{itemId}/properties'
@@ -116,24 +116,30 @@ export class DashboardEndpoint extends EndpointService {
     /**
     * Returns a list of all dashboards, optionally filtering them
     * @param {string} [filter] An optional filter that is applied to the list of dashboards. Valid values include "favourite" for returning only favourite dashboards, and "my" for returning dashboards that are owned by the calling user.
-    * @param {number} [startAt] The index of the first dashboard to return (0-based). must be 0 or a multiple of maxResults
-    * @param {number} [maxResults] a hint as to the maximum number of dashboards to return in each call. Note that the Jira server reserves the right to impose a maxResults limit that is lower than the value that a client provides, dues to lack of resources or any other condition. When this happens, your results will be truncated. Callers should always check the returned maxResults to determine the value that is effectively being used.
-    * @returns {Promise<DashboardsOutput>} Promise with the requested dashboards data
+    * @param {PageOptions} [pageOptions] Page options to paginate results (or obtain more results per page)
+    * @returns {Promise<Page<Dashboard>>} Promise with the requested page data
     */
-    async list(filter?: string, startAt?: number, maxResults?: number): Promise<DashboardsOutput> {
-        const request = this.doGet();
+    async list(filter?: string, pageOptions?: PageOptions): Promise<Page<Dashboard>> {
+        const request = this.doGet({
+            pageOptions: pageOptions,
+        });
         try {
             if (filter) {
                 request.addQueryParam('filter', filter);
             }
-            if (filter) {
-                request.addQueryParam('startAt', startAt);
-            }
-            if (filter) {
-                request.addQueryParam('maxResults', maxResults);
-            }
             const result = await request.execute();
-            return result.data as DashboardsOutput;
+            const data = result.data as DashboardsOutput;
+            const page: Page<Dashboard> = new Page();
+            page.isLast === !data.next;
+            page.nextPage = data.next;
+            page.previousPage = data.prev;
+            page.maxResults = data.maxResults;
+            page.self = request.endpoint;
+            page.startAt = data.startAt;
+            page.total = data.total;
+            page.values = data.dashboards;
+            page.nextPageStart = (!page.isLast && !page.nextPage) ? (page.startAt + page.maxResults) : undefined;
+            return page;
         } catch (error) {
             throw error;
         }

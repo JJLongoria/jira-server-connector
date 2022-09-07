@@ -1,4 +1,4 @@
-import { Basic, Comment, CommentsOutput, EditMeta, EndpointService, Issue, IssueCommentsOptions, IssueLink, IssueLinks, IssueNotification, IssueOptions, IssueRemoteLink, IssueTransition, IssueTransitions, IssueUpdate, IssueVotes, IssueWatchers, IssueWorklog, IssueCreateWorklogsOptions, IssueWorklogsOutput, IssueUpdateWorklogsOptions, CreateMeta, Page, FieldMeta, IssuePickerOutput, IssuePickerOptions, Attachment } from "../types";
+import { Basic, Comment, CommentsOutput, EditMeta, EndpointService, Issue, IssueLink, IssueLinks, IssueNotification, IssueOptions, IssueRemoteLink, IssueTransition, IssueTransitions, IssueUpdate, IssueVotes, IssueWatchers, IssueWorklog, IssueCreateWorklogsOptions, IssueWorklogsOutput, IssueUpdateWorklogsOptions, CreateMeta, Page, FieldMeta, IssuePickerOutput, IssuePickerOptions, Attachment, PageOptions } from "../types";
 
 /**
  * Class to manage and expose all endpoints and operations below '/rest/api/latest/issue/{issueIdOrKey}/comment'
@@ -11,15 +11,27 @@ export class IssueCommentEndpoint extends EndpointService {
 
     /**
     * Returns all comments for an issue. Results can be ordered by the "created" field which means the date a comment was added
-    * @param {IssueCommentsOptions} [options] Options to list the comments
-    * @returns {Promise<CommentsOutput>} Promise with the requested comments data
+    * @param {PageOptions} [pageOptions] Page options to paginate results (or obtain more results per page)
+    * @returns {Promise<Page<Comment>>} Promise with the requested comments data
     */
-    async list(options?: IssueCommentsOptions): Promise<CommentsOutput> {
-        const request = this.doGet();
+    async list(pageOptions?: PageOptions): Promise<Page<Comment>> {
+        const request = this.doGet({
+            pageOptions: pageOptions
+        });
         try {
-            this.processOptions(request, options);
             const result = await request.execute();
-            return result.data as CommentsOutput;
+            const data = result.data as CommentsOutput;
+            const page: Page<Comment> = new Page();
+            page.isLast === (data.startAt + data.maxResults) >= data.total;
+            //page.nextPage = data.next;
+            //page.previousPage = data.prev;
+            page.maxResults = data.maxResults;
+            page.self = request.endpoint;
+            page.startAt = data.startAt;
+            page.total = data.total;
+            page.values = data.comments;
+            page.nextPageStart = (!page.isLast && !page.nextPage) ? (page.startAt + page.maxResults) : undefined;
+            return result.data as Page<Comment>;
         } catch (error) {
             throw error;
         }
@@ -414,13 +426,27 @@ export class IssueWorklogEndpoint extends EndpointService {
 
     /**
     * Returns all work logs for an issue. Note: Work logs won't be returned if the Log work field is hidden for the project.
-    * @returns {Promise<IssueWorklogsOutput>} Promise with the requested worklogs data
+    * @param {PageOptions} [pageOptions] Page options to paginate results (or obtain more results per page)
+    * @returns {Promise<Page<IssueWorklog>>} Promise with the requested page data
     */
-    async list(): Promise<IssueWorklogsOutput> {
-        const request = this.doGet();
+    async list(pageOptions?: PageOptions): Promise<Page<IssueWorklog>> {
+        const request = this.doGet({
+            pageOptions: pageOptions,
+        });
         try {
             const result = await request.execute();
-            return result.data as IssueWorklogsOutput;
+            const data = result.data as IssueWorklogsOutput;
+            const page: Page<IssueWorklog> = new Page();
+            page.isLast === (data.startAt + data.maxResults) >= data.total;
+            //page.nextPage = data.next;
+            //page.previousPage = data.prev;
+            page.maxResults = data.maxResults;
+            page.self = request.endpoint;
+            page.startAt = data.startAt;
+            page.total = data.total;
+            page.values = data.worklogs;
+            page.nextPageStart = (!page.isLast && !page.nextPage) ? (page.startAt + page.maxResults) : undefined;
+            return page as Page<IssueWorklog>;
         } catch (error) {
             throw error;
         }
@@ -513,21 +539,15 @@ export class IssueCreateMetaEndpoint extends EndpointService {
     /**
     * Returns the metadata for issue types used for creating issues. Data will not be returned if the user does not have permission to create issues in that project.
     * @param {string} projectIdOrKey The project id or key
-    * @param {number} [startAt] The page offset, if not specified then defaults to 0
-    * @param {number} [maxResults] How many results on the page should be included. Defaults to 50.
+    * @param {PageOptions} [pageOptions] Page options to paginate results (or obtain more results per page)
     * @returns {Promise<Page<CreateMeta>>} Promise with the requested page data
     */
-    async list(projectIdOrKey: string, startAt?: number, maxResults?: number): Promise<Page<CreateMeta>> {
+    async list(projectIdOrKey: string, pageOptions?: PageOptions): Promise<Page<CreateMeta>> {
         const request = this.doGet({
-            param: projectIdOrKey + '/issuetypes'
+            param: projectIdOrKey + '/issuetypes',
+            pageOptions: pageOptions,
         });
         try {
-            if (startAt !== undefined) {
-                request.addQueryParam('startAt', startAt);
-            }
-            if (maxResults !== undefined) {
-                request.addQueryParam('maxResults', maxResults);
-            }
             const result = await request.execute();
             return result.data as Page<CreateMeta>;
         } catch (error) {

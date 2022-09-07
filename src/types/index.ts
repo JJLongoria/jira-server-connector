@@ -157,11 +157,11 @@ export class Page<T> {
     maxResults: number = 0;
     total: number = 0;
     isLast: boolean = true;
-    values: T[] = [];
-    self: string = '';
-    nextPage: string = '';
-
-
+    values: T[] | T = [];
+    self?: string = '';
+    nextPage?: string = '';
+    previousPage?: string = '';
+    nextPageStart?: number;
 }
 
 export interface Self {
@@ -776,13 +776,6 @@ export interface FieldOperation {
 
 }
 
-export interface IssueCommentsOptions {
-    startAt?: number;
-    maxResults?: number;
-    orderBy?: string;
-    expand?: string;
-}
-
 export interface Comment extends Self {
     id?: string;
     author?: User;
@@ -1036,4 +1029,24 @@ export interface IssueTypeUpdate {
     name: string;
     description: string;
     avatarId: number;
+}
+
+export interface IssueTypeSchemeInput {
+    name: string;
+    description: string;
+    defaultIssueTypeId: string;
+    issueTypeIds: string[];
+}
+
+export interface IssueTypeScheme extends Self{
+    expand: string;
+    id: string;
+    name: string;
+    description: string;
+    defaultIssueType: IssueType;
+    issueTypes: IssueType[];
+}
+
+export interface IssueTypeSchemeList extends Self{
+    schemes: IssueTypeScheme[];
 }

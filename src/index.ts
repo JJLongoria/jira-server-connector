@@ -14,6 +14,7 @@ import { IssueEndpoint } from "./endpoints/issue";
 import { IssueLinkEndpoint } from "./endpoints/issueLink";
 import { IssueSecuritySchemeEndpoint } from "./endpoints/issueSecuritySchemes";
 import { IssueTypeEndpoint } from "./endpoints/issueType";
+import { IssueTypeSchemeEndpoint } from "./endpoints/issueTypeScheme";
 import { PermissionsEndpoint } from "./endpoints/permissions";
 import { Basic, BasicAuth } from "./types";
 
@@ -126,6 +127,11 @@ export class JiraServerConnector {
      */
     issueTypes: IssueTypeEndpoint;
 
+    /**
+     * Contains all operations from '/rest/api/latest/issueLink' and '/rest/api/latest/issuetype'
+     */
+     issueTypesScheme: IssueTypeSchemeEndpoint;
+
 
     /**
      * Instance new Jira Server Connector with user credentials and Jira host.
@@ -150,6 +156,7 @@ export class JiraServerConnector {
         this.issueLinks = new IssueLinkEndpoint(this.auth);
         this.issueSecuritySchemes = new IssueSecuritySchemeEndpoint(this.auth);
         this.issueTypes = new IssueTypeEndpoint(this.auth);
+        this.issueTypesScheme = new IssueTypeSchemeEndpoint(this.auth);
     }
 
 
