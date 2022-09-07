@@ -444,6 +444,13 @@ export interface IssueType extends Self {
     avatarId?: number;
 }
 
+export interface IssueTypeStatuses extends Self {
+    id: string;
+    name: string;
+    subtask: boolean;
+    statuses: Status[];
+}
+
 export interface SimpleLink {
     id: string;
     styleClass: string;
@@ -1180,4 +1187,63 @@ export interface PermissionHolder {
     field: Field;
     projectRole: ProjectRole;
     expand: string;
+}
+
+export interface ProjectOptions {
+    expand?: string;
+    recent?: number;
+    includeArchived?: boolean;
+    browseArchive?: boolean;
+}
+
+export interface ProjectInput {
+    key?: number;
+    name?: string;
+    projectTypeKey?: string;
+    projectTemplateKey?: string;
+    description?: string;
+    lead?: string;
+    url?: string;
+    assigneeType?: 'PROJECT_LEAD' | 'UNASSIGNED';
+    avatarId?: number;
+    issueSecurityScheme?: number;
+    permissionScheme?: number;
+    notificationScheme?: number;
+    workflowSchemeId?: number;
+    categoryId?: number;
+}
+
+export interface ProjectIdentity extends Self {
+    id: number;
+    key: string;
+}
+
+export interface ProjectRoleActorsInput {
+    id: number;
+    categorisedActors: { [key: string]: string[] };
+}
+
+export interface SecurityLevels {
+    levels: Securitylevel[];
+}
+
+export interface Securitylevel extends Self {
+    id: string;
+    description: string;
+    name: string;
+}
+
+export interface WorkflowScheme extends Self {
+    id: number;
+    description: string;
+    name: string;
+    defaultWorkflow: string;
+    issueTypeMappings: { [key: string]: string };
+    originalDefaultWorkflow: string;
+    originalIssueTypeMappings: { [key: string]: string };
+    draft: boolean;
+    lastModifiedUser: User;
+    lastModified: string;
+    updateDraftIfNeeded: boolean;
+    issueTypes: { [key: string]: IssueType };
 }

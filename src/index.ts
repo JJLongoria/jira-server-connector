@@ -9,21 +9,21 @@ import { DashboardEndpoint } from "./endpoints/dashboard";
 import { EmailTemplatesEndpoint } from "./endpoints/emailTemplates";
 import { FieldEndpoint } from "./endpoints/field";
 import { FilterEndpoint } from "./endpoints/filter";
-import { GroupEndpoint } from "./endpoints/group";
-import { IssueEndpoint } from "./endpoints/issue";
-import { IssueLinkEndpoint } from "./endpoints/issueLink";
+import { GroupEndpoint } from "./endpoints/groups";
+import { IssueEndpoint } from "./endpoints/issues";
+import { IssueLinkEndpoint } from "./endpoints/issueLinks";
 import { IssueSecuritySchemeEndpoint } from "./endpoints/issueSecuritySchemes";
-import { IssueTypeEndpoint } from "./endpoints/issueType";
-import { IssueTypeSchemeEndpoint } from "./endpoints/issueTypeScheme";
+import { IssueTypeEndpoint } from "./endpoints/issueTypes";
+import { IssueTypeSchemeEndpoint } from "./endpoints/issueTypeSchemes";
 import { JQLEndpoint } from "./endpoints/jql";
-import { LicenseValidatorEndpoint } from "./endpoints/license";
+import { LicenseValidatorEndpoint } from "./endpoints/licenseValidator";
 import { MyPreferencesEndpoint } from "./endpoints/mypreferences";
 import { MySelfEndpoint } from "./endpoints/myself";
-import { NotificationSchemeEndpoint } from "./endpoints/notificationScheme";
+import { NotificationSchemeEndpoint } from "./endpoints/notificationSchemes";
 import { PasswordEndpoint } from "./endpoints/password";
 import { PermissionsEndpoint } from "./endpoints/permissions";
-import { PermissionSchemeEndpoint } from "./endpoints/permissionScheme";
-import { PriorityEndpoint } from "./endpoints/priority";
+import { PermissionSchemeEndpoint } from "./endpoints/permissionSchemes";
+import { PriorityEndpoint } from "./endpoints/priorities";
 import { Basic, BasicAuth, PermissionScheme } from "./types";
 
 export * from "./types";
@@ -138,7 +138,7 @@ export class JiraServerConnector {
     /**
      * Contains all operations from '/rest/api/latest/issuetype'
      */
-    issueTypesScheme: IssueTypeSchemeEndpoint;
+    issueTypesSchemes: IssueTypeSchemeEndpoint;
 
     /**
      * Contains all operations from '/rest/api/latest/jql'
@@ -163,7 +163,7 @@ export class JiraServerConnector {
     /**
      * Contains all operations from '/rest/api/latest/notificationscheme'
      */
-    notificationScheme: NotificationSchemeEndpoint;
+    notificationSchemes: NotificationSchemeEndpoint;
 
     /**
      * Contains all operations from '/rest/api/latest/password'
@@ -173,12 +173,12 @@ export class JiraServerConnector {
     /**
      * Contains all operations from '/rest/api/latest/permissionscheme'
      */
-    permissionScheme: PermissionSchemeEndpoint;
+    permissionSchemes: PermissionSchemeEndpoint;
 
     /**
      * Contains all operations from '/rest/api/latest/priority'
      */
-    priority: PriorityEndpoint;
+    priorities: PriorityEndpoint;
 
     /**
      * Instance new Jira Server Connector with user credentials and Jira host.
@@ -203,15 +203,15 @@ export class JiraServerConnector {
         this.issueLinks = new IssueLinkEndpoint(this.auth);
         this.issueSecuritySchemes = new IssueSecuritySchemeEndpoint(this.auth);
         this.issueTypes = new IssueTypeEndpoint(this.auth);
-        this.issueTypesScheme = new IssueTypeSchemeEndpoint(this.auth);
+        this.issueTypesSchemes = new IssueTypeSchemeEndpoint(this.auth);
         this.jql = new JQLEndpoint(this.auth);
         this.licenseValidator = new LicenseValidatorEndpoint(this.auth);
         this.myPreferences = new MyPreferencesEndpoint(this.auth);
         this.mySelf = new MySelfEndpoint(this.auth);
-        this.notificationScheme = new NotificationSchemeEndpoint(this.auth);
+        this.notificationSchemes = new NotificationSchemeEndpoint(this.auth);
         this.password = new PasswordEndpoint(this.auth);
-        this.permissionScheme = new PermissionSchemeEndpoint(this.auth);
-        this.priority = new PriorityEndpoint(this.auth);
+        this.permissionSchemes = new PermissionSchemeEndpoint(this.auth);
+        this.priorities = new PriorityEndpoint(this.auth);
     }
 
 

@@ -265,5 +265,29 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+- **Implemented all Project Endpoints (`/rest/api/latest/GET /rest/api/2/project`)**:
+
+    - `/rest/api/latest/project` (GET, PUT)
+    - `/rest/api/latest/project/{projectIdOrKey}` (GET, PUT, DELETE)
+    - `/rest/api/latest/project/{projectIdOrKey}/archive` (PUT)
+    - `/rest/api/latest/project/{projectIdOrKey}/avatar` (POST, PUT)
+    - `/rest/api/latest/project/{projectIdOrKey}/avatar/{avatarId}` (DELETE)
+    - `/rest/api/latest/project/{projectIdOrKey}/avatar/temporary` (POST)
+    - `/rest/api/latest/project/{projectIdOrKey}/avatars` (GET)
+    - `/rest/api/latest/project/{projectIdOrKey}/components` (GET)
+    - `/rest/api/latest/project/{projectIdOrKey}/restore` (PUT)
+    - `/rest/api/latest/project/{projectIdOrKey}/statuses` (GET)
+    - `/rest/api/latest/project/{projectIdOrKey}/statuses/type/{newProjectTypeKey}` (PUT)
+    - `/rest/api/latest/project/{projectIdOrKey}/version` (GET)
+    - `/rest/api/latest/project/{projectIdOrKey}/role` (GET)
+    - `/rest/api/latest/project/{projectIdOrKey}/role/{roleId}` (GET, POST, PUT, DELETE)
+    - `/rest/api/latest/project/{projectIdOrKey}/issuesecuritylevelscheme` (GET)
+    - `/rest/api/latest/project/{projectIdOrKey}/notificationscheme` (GET)
+    - `/rest/api/latest/project/{projectIdOrKey}/permissionscheme` (GET, PUT)
+    - `/rest/api/latest/project/{projectIdOrKey}/securitylevel` (GET)
+    - `/rest/api/latest/project/{projectIdOrKey}/workflowscheme` (GET)
+
+---
+
 
 

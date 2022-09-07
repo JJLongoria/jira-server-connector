@@ -37,7 +37,7 @@ export class AvatarEndpoint extends EndpointService {
     * @param {string} size Size of file
     * @returns {Promise<AvatarCroping>} Promise with the temporary avatar cropping instructions
     */
-    async temporary(type: string, filename: string, size: number): Promise<AvatarCroping> {
+    async upload(type: string, filename: string, size: number): Promise<AvatarCroping> {
         const request = this.doPost({
             param: type + '/temporary'
         }).asFile().withBody(filename);
@@ -57,7 +57,7 @@ export class AvatarEndpoint extends EndpointService {
     * @param {AvatarCroping} temporaryCroping Name of file being uploaded
     * @returns {Promise<void>} If not throw errors, operation finish successfully
     */
-     async createFromTemporary(type: string, temporaryCroping: AvatarCroping): Promise<void> {
+    async crop(type: string, temporaryCroping: AvatarCroping): Promise<void> {
         const request = this.doPost({
             param: type + '/temporaryCrop'
         }).asJson().withBody(temporaryCroping);
