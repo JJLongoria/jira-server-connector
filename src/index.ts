@@ -16,13 +16,14 @@ import { IssueSecuritySchemeEndpoint } from "./endpoints/issueSecuritySchemes";
 import { IssueTypeEndpoint } from "./endpoints/issueType";
 import { IssueTypeSchemeEndpoint } from "./endpoints/issueTypeScheme";
 import { JQLEndpoint } from "./endpoints/jql";
-import { LicenseEndpoint } from "./endpoints/license";
+import { LicenseValidatorEndpoint } from "./endpoints/license";
 import { MyPreferencesEndpoint } from "./endpoints/mypreferences";
 import { MySelfEndpoint } from "./endpoints/myself";
 import { NotificationSchemeEndpoint } from "./endpoints/notificationScheme";
 import { PasswordEndpoint } from "./endpoints/password";
 import { PermissionsEndpoint } from "./endpoints/permissions";
 import { PermissionSchemeEndpoint } from "./endpoints/permissionScheme";
+import { PriorityEndpoint } from "./endpoints/priority";
 import { Basic, BasicAuth, PermissionScheme } from "./types";
 
 export * from "./types";
@@ -145,9 +146,9 @@ export class JiraServerConnector {
     jql: JQLEndpoint;
 
     /**
-     * Contains all operations from '/rest/api/latest/license'
+     * Contains all operations from '/rest/api/latest/licenseValidator'
      */
-    license: LicenseEndpoint;
+    licenseValidator: LicenseValidatorEndpoint;
 
     /**
      * Contains all operations from '/rest/api/latest/mypreferences'
@@ -175,6 +176,11 @@ export class JiraServerConnector {
     permissionScheme: PermissionSchemeEndpoint;
 
     /**
+     * Contains all operations from '/rest/api/latest/priority'
+     */
+    priority: PriorityEndpoint;
+
+    /**
      * Instance new Jira Server Connector with user credentials and Jira host.
      * @param {BasicAuth} auth Basic Authorization info and Jira host 
      */
@@ -199,12 +205,13 @@ export class JiraServerConnector {
         this.issueTypes = new IssueTypeEndpoint(this.auth);
         this.issueTypesScheme = new IssueTypeSchemeEndpoint(this.auth);
         this.jql = new JQLEndpoint(this.auth);
-        this.license = new LicenseEndpoint(this.auth);
+        this.licenseValidator = new LicenseValidatorEndpoint(this.auth);
         this.myPreferences = new MyPreferencesEndpoint(this.auth);
         this.mySelf = new MySelfEndpoint(this.auth);
         this.notificationScheme = new NotificationSchemeEndpoint(this.auth);
         this.password = new PasswordEndpoint(this.auth);
         this.permissionScheme = new PermissionSchemeEndpoint(this.auth);
+        this.priority = new PriorityEndpoint(this.auth);
     }
 
 

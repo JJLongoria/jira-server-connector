@@ -199,5 +199,71 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+- **Implemented all Issue Type Scheme Endpoints (`/rest/api/latest/issuetypescheme`)**:
+
+    - `/rest/api/latest/issuetypescheme` (GET, POST)
+    - `/rest/api/latest/issuetypescheme/{schemeId}` (GET, PUT, DELETE)
+    - `/rest/api/latest/issuetypescheme/{schemeId}/associations` (GET, POST, PUT, DELETE)
+    - `/rest/api/latest/issuetypescheme/{schemeId}/associations/{projectIdOrKey}` (DELETE)
+
+---
+
+- **Implemented all JQL Endpoints (`/rest/api/latest/jql`)**:
+
+    - `/rest/api/latest/jql/autocompletedata` (GET)
+    - `/rest/api/latest/jql/autocompletedata/suggestions` (GET)
+
+---
+
+- **Implemented all License Validator Endpoints (`/rest/api/latest/licenseValidator`)**:
+
+    - `/rest/api/latest/licenseValidator` (POST)
+
+---
+
+- **Implemented all My Preferences Endpoints (`/rest/api/latest/mypreferences`)**:
+
+    - `/rest/api/latest/mypreferences` (GET, PUT, DELETE)
+
+---
+
+- **Implemented all My Self Endpoints (`/rest/api/latest/myself`)**:
+
+    - `/rest/api/latest/myself` (GET, PUT)
+    - `/rest/api/latest/myself/password` (PUT)
+
+---
+
+- **Implemented all Notification Scheme Endpoints (`/rest/api/latest/notificationscheme`)**:
+
+    - `/rest/api/latest/notificationscheme` (GET)
+    - `/rest/api/latest/notificationscheme/{schemeId}` (GET)
+
+---
+
+- **Implemented all Password Endpoints (`/rest/api/latest/password`)**:
+
+    - `/rest/api/latest/password/policy` (GET)
+    - `/rest/api/latest/password/policy/createUser` (POST)
+    - `/rest/api/latest/password/policy/updateUser` (POST)
+
+---
+
+- **Implemented all Permission Scheme Endpoints (`/rest/api/latest/GET /rest/api/2/permissionscheme`)**:
+
+    - `/rest/api/latest/permissionscheme` (GET, POST)
+    - `/rest/api/latest/permissionscheme/{schemeId}` (GET, PUT, DELETE)
+    - `/rest/api/latest/permissionscheme/{schemeId/permission` (GET, POST)
+    - `/rest/api/latest/permissionscheme/{schemeId/permission/{permissionId}` (GET, DELETE)
+
+---
+
+- **Implemented all Priority Endpoints (`/rest/api/latest/GET /rest/api/2/priority`)**:
+
+    - `/rest/api/latest/priority` (GET)
+    - `/rest/api/latest/priority/{priorityId}` (GET)
+
+---
+
 
 

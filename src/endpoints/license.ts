@@ -1,12 +1,12 @@
 import { Basic, EndpointService } from "../types";
 
 /**
- * Class to manage and expose all endpoints and operations below '/rest/api/latest/license'
+ * Class to manage and expose all endpoints and operations below '/rest/api/latest/licenseValidator'
  */
-export class LicenseEndpoint extends EndpointService {
+export class LicenseValidatorEndpoint extends EndpointService {
 
     constructor(auth: Basic) {
-        super(auth, '/license');
+        super(auth, '/licenseValidator');
     }
 
     /**
@@ -15,9 +15,7 @@ export class LicenseEndpoint extends EndpointService {
      * @returns {Promise<void>} If not throw erros, the license is valid.
      */
     async validate(license: string): Promise<void> {
-        const request = this.doPost({
-            param: 'validator'
-        }).withBody(license);
+        const request = this.doPost().withBody(license);
         try {
             const result = await request.execute();
             return;
