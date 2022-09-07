@@ -22,7 +22,8 @@ import { MySelfEndpoint } from "./endpoints/myself";
 import { NotificationSchemeEndpoint } from "./endpoints/notificationScheme";
 import { PasswordEndpoint } from "./endpoints/password";
 import { PermissionsEndpoint } from "./endpoints/permissions";
-import { Basic, BasicAuth } from "./types";
+import { PermissionSchemeEndpoint } from "./endpoints/permissionScheme";
+import { Basic, BasicAuth, PermissionScheme } from "./types";
 
 export * from "./types";
 
@@ -161,13 +162,17 @@ export class JiraServerConnector {
     /**
      * Contains all operations from '/rest/api/latest/notificationscheme'
      */
-     notificationScheme: NotificationSchemeEndpoint;
+    notificationScheme: NotificationSchemeEndpoint;
 
-     /**
+    /**
      * Contains all operations from '/rest/api/latest/password'
      */
-      password: PasswordEndpoint;
+    password: PasswordEndpoint;
 
+    /**
+     * Contains all operations from '/rest/api/latest/permissionscheme'
+     */
+    permissionScheme: PermissionSchemeEndpoint;
 
     /**
      * Instance new Jira Server Connector with user credentials and Jira host.
@@ -199,6 +204,7 @@ export class JiraServerConnector {
         this.mySelf = new MySelfEndpoint(this.auth);
         this.notificationScheme = new NotificationSchemeEndpoint(this.auth);
         this.password = new PasswordEndpoint(this.auth);
+        this.permissionScheme = new PermissionSchemeEndpoint(this.auth);
     }
 
 

@@ -1137,3 +1137,47 @@ export interface PasswordPolicyUpdateUser {
     oldPassword?: string;
     newPassword: string;
 }
+
+export interface PermissionSchemes {
+    permissionSchemes: PermissionScheme[];
+}
+
+export interface PermissionSchemeInput {
+    name: string;
+    description: string;
+    permissions: PermissionGrantInput[];
+}
+
+export interface PermissionGrantInput {
+    holder: PermissionHolder;
+    permission: string;
+}
+
+export interface PermissionHolderInput {
+    type: string;
+    parameter: string;
+}
+
+export interface PermissionScheme extends Self {
+    expand: string;
+    id: number;
+    name: string;
+    description: string;
+    permissions: PermissionGrant[];
+}
+
+export interface PermissionGrant extends Self {
+    id: number;
+    holder: PermissionHolder;
+    permission: string;
+}
+
+export interface PermissionHolder {
+    type: string;
+    parameter: string;
+    user: User;
+    group: Group;
+    field: Field;
+    projectRole: ProjectRole;
+    expand: string;
+}

@@ -80,4 +80,5 @@ export class PasswordEndpoint extends EndpointService {
     constructor(auth: Basic) {
         super(auth, '/password');
     }
+    
 }
