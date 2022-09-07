@@ -15,7 +15,9 @@ export class LicenseEndpoint extends EndpointService {
      * @returns {Promise<void>} If not throw erros, the license is valid.
      */
     async validate(license: string): Promise<void> {
-        const request = this.doPost().withBody(license);
+        const request = this.doPost({
+            param: 'validator'
+        }).withBody(license);
         try {
             const result = await request.execute();
             return;

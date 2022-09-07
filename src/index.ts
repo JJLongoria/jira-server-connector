@@ -17,6 +17,7 @@ import { IssueTypeEndpoint } from "./endpoints/issueType";
 import { IssueTypeSchemeEndpoint } from "./endpoints/issueTypeScheme";
 import { JQLEndpoint } from "./endpoints/jql";
 import { LicenseEndpoint } from "./endpoints/license";
+import { MyPreferencesEndpoint } from "./endpoints/mypreferences";
 import { PermissionsEndpoint } from "./endpoints/permissions";
 import { Basic, BasicAuth } from "./types";
 
@@ -144,6 +145,11 @@ export class JiraServerConnector {
      */
     license: LicenseEndpoint;
 
+    /**
+     * Contains all operations from '/rest/api/latest/mypreferences'
+     */
+     myPreferences: MyPreferencesEndpoint;
+
 
     /**
      * Instance new Jira Server Connector with user credentials and Jira host.
@@ -171,6 +177,7 @@ export class JiraServerConnector {
         this.issueTypesScheme = new IssueTypeSchemeEndpoint(this.auth);
         this.jql = new JQLEndpoint(this.auth);
         this.license = new LicenseEndpoint(this.auth);
+        this.myPreferences = new MyPreferencesEndpoint(this.auth);
     }
 
 
