@@ -1050,3 +1050,25 @@ export interface IssueTypeScheme extends Self{
 export interface IssueTypeSchemeList extends Self{
     schemes: IssueTypeScheme[];
 }
+
+export interface AutoComplete {
+    visibleFieldNames: string[];
+    visibleFunctionNames: string[];
+    jqlReservedWords: string[];
+}
+
+export interface AutoCompleteInput {
+    fieldName?: string;
+    fieldValue?: string;
+    predicateName?: string;
+    predicateValue?: string;
+}
+
+export interface AutoCompleteSuggestions {
+    results: AutoCompleteSuggestion[];
+}
+
+export interface AutoCompleteSuggestion {
+    value: string;
+    displayName: string;
+}
