@@ -157,7 +157,7 @@ export class Page<T> {
     maxResults: number = 0;
     total: number = 0;
     isLast: boolean = true;
-    values: T[] | T = [];
+    values: T[] = [];
     self?: string = '';
     nextPage?: string = '';
     previousPage?: string = '';
@@ -1038,7 +1038,7 @@ export interface IssueTypeSchemeInput {
     issueTypeIds: string[];
 }
 
-export interface IssueTypeScheme extends Self{
+export interface IssueTypeScheme extends Self {
     expand: string;
     id: string;
     name: string;
@@ -1047,7 +1047,7 @@ export interface IssueTypeScheme extends Self{
     issueTypes: IssueType[];
 }
 
-export interface IssueTypeSchemeList extends Self{
+export interface IssueTypeSchemeList extends Self {
     schemes: IssueTypeScheme[];
 }
 
@@ -1081,46 +1081,59 @@ export interface NotificationScheme extends Self {
     notificationSchemeEvents: NotificationSchemeEvent[];
 }
 
-export interface NotificationSchemeEvent{
+export interface NotificationSchemeEvent {
     event: NotificationEvent;
     notifications: CustomFieldValueNotification[] | EmailNotification[] | GroupNotification[] | ProjectRoleNotification[] | RoleNotification[] | UserNotification[];
 
 }
 
-export interface NotificationEvent{
+export interface NotificationEvent {
     id: number;
     type: string;
     description: string;
     templateEvent: NotificationEvent;
 }
 
-export interface Notification{
+export interface Notification {
     id: number;
     notificationType: string;
     parameter: string;
     expand: string;
 }
 
-export interface CustomFieldValueNotification extends Notification{
+export interface CustomFieldValueNotification extends Notification {
     field: Field;
 }
 
-export interface EmailNotification extends Notification{
+export interface EmailNotification extends Notification {
     emailAddress: string;
 }
 
-export interface GroupNotification extends Notification{
+export interface GroupNotification extends Notification {
     group: Group;
 }
 
-export interface ProjectRoleNotification extends Notification{
+export interface ProjectRoleNotification extends Notification {
     projectRole: ProjectRole;
 }
 
-export interface RoleNotification extends Notification{
+export interface RoleNotification extends Notification {
 
 }
 
-export interface UserNotification extends Notification{
+export interface UserNotification extends Notification {
     user: User;
+}
+
+export interface PasswordPolicyCreateUser {
+    username: string;
+    displayName?: string;
+    emailAddress?: string;
+    password: string;
+}
+
+export interface PasswordPolicyUpdateUser {
+    username: string;
+    oldPassword?: string;
+    newPassword: string;
 }
