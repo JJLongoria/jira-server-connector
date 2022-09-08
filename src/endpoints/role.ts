@@ -190,7 +190,7 @@ export class RoleEndpoint extends EndpointService {
         try {
             this.processOptions(request, {
                 swap: roleSwap
-            })
+            });
             const result = await request.execute();
             return;
         } catch (error) {

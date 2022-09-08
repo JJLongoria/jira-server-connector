@@ -1360,3 +1360,10 @@ export interface ScreenableField {
     name: string;
     type: string;
 }
+
+export interface SearchIssuesOptions {
+    jql: string;
+    startAt?: number;
+    maxResults?: number;
+    fields?: string[];
+}

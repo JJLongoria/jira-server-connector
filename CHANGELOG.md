@@ -134,7 +134,7 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-- **Implemented all Issues Endpoints (`/rest/api/latest/issue`)**:
+- **Implemented all Issues Endpoints (`/rest/api/latest/issue` and `/rest/api/latest/search`)**:
 
     - `/rest/api/latest/issue/bulk` (POST)
 
@@ -166,6 +166,10 @@ All notable changes to this project will be documented in this file.
     ---
 
     - `/rest/api/latest/issue/picker` (GET)
+
+    ---
+
+    - `/rest/api/latest/search` (POST)
 
 ---
 

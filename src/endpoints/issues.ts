@@ -1,4 +1,5 @@
-import { Basic, Comment, CommentsOutput, EditMeta, EndpointService, Issue, IssueLink, IssueLinks, IssueNotification, IssueOptions, IssueRemoteLink, IssueTransition, IssueTransitions, IssueUpdate, IssueVotes, IssueWatchers, IssueWorklog, IssueCreateWorklogsOptions, IssueWorklogsOutput, IssueUpdateWorklogsOptions, CreateMeta, Page, FieldMeta, IssuePickerOutput, IssuePickerOptions, Attachment, PageOptions } from "../types";
+import { StrUtils } from "../core/strUtils";
+import { Basic, Comment, CommentsOutput, EditMeta, EndpointService, Issue, IssueLink, IssueLinks, IssueNotification, IssueOptions, IssueRemoteLink, IssueTransition, IssueTransitions, IssueUpdate, IssueVotes, IssueWatchers, IssueWorklog, IssueCreateWorklogsOptions, IssueWorklogsOutput, IssueUpdateWorklogsOptions, CreateMeta, Page, FieldMeta, IssuePickerOutput, IssuePickerOptions, Attachment, PageOptions, SearchIssuesOptions } from "../types";
 
 /**
  * Class to manage and expose all endpoints and operations below '/rest/api/latest/issue/{issueIdOrKey}/comment'
@@ -965,6 +966,22 @@ export class IssueEndpoint extends EndpointService {
             this.processOptions(request, options);
             const result = await request.execute();
             return result.data as IssuePickerOutput;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    /**
+    * Performs a search using JQL.
+    * @param {SearchIssuesOptions} options Search Issue options
+    * @returns {Promise<CustomField>} Promise with a requested custom fields page data
+    */
+    async search(options: SearchIssuesOptions): Promise<Page<Issue>> {
+        const request = this.doPost().asJson().withBody(options);
+        try {
+            request.endpoint = StrUtils.replace(request.endpoint, '/issue', '/search');
+            const result = await request.execute();
+            return result.data as Page<Issue>;
         } catch (error) {
             throw error;
         }
