@@ -315,5 +315,13 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+- **Implemented all Roles Endpoints (`/rest/api/2/role`)**:
+
+    - `/rest/api/latest/role` (GET, POST)
+    - `/rest/api/latest/role/{roleId}` (GET, POST, PUT, DELETE)
+    - `/rest/api/latest/role/{roleId}/actors` (GET, POST, DELETE)
+
+---
+
 
 

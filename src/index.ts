@@ -27,6 +27,8 @@ import { PriorityEndpoint } from "./endpoints/priorities";
 import { Basic, BasicAuth, PermissionScheme } from "./types";
 import { ProjectEndpoint } from "./endpoints/projects";
 import { ProjectCategoryEndpoint } from "./endpoints/projectCategory";
+import { ReindexEndpoint } from "./endpoints/reindex";
+import { RoleEndpoint } from "./endpoints/role";
 
 export * from "./types";
 
@@ -193,6 +195,16 @@ export class JiraServerConnector {
     projectCategories: ProjectCategoryEndpoint;
 
     /**
+     * Contains all operations from '/rest/api/latest/reindex'
+     */
+    reindex: ReindexEndpoint;
+
+    /**
+     * Contains all operations from '/rest/api/latest/role'
+     */
+    roles: RoleEndpoint;
+
+    /**
      * Instance new Jira Server Connector with user credentials and Jira host.
      * @param {BasicAuth} auth Basic Authorization info and Jira host 
      */
@@ -226,6 +238,8 @@ export class JiraServerConnector {
         this.priorities = new PriorityEndpoint(this.auth);
         this.projects = new ProjectEndpoint(this.auth);
         this.projectCategories = new ProjectCategoryEndpoint(this.auth);
+        this.reindex = new ReindexEndpoint(this.auth);
+        this.roles = new RoleEndpoint(this.auth);
     }
 
 

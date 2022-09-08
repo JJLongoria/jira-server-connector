@@ -1297,3 +1297,12 @@ export interface ReindexRequest {
     startTime: string;
     completionTime: string;
 }
+
+export interface ActorInput {
+    user: string[];
+    group: string[];
+}
+
+export interface RoleActors {
+    actors: RoleActor[];
+}
