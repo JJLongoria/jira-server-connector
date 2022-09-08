@@ -319,7 +319,7 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-- **Implemented all Roles Endpoints (`/rest/api/2/resolution`)**:
+- **Implemented all Resolutions Endpoints (`/rest/api/2/resolution`)**:
 
     - `/rest/api/latest/resolution/{resolutionId}` (GET)
     - `/rest/api/latest/resolution/page` (GET)
@@ -351,6 +351,13 @@ All notable changes to this project will be documented in this file.
 - **Implemented all Security Levels Endpoints (`/rest/api/2/securitylevel`)**:
 
     - `/rest/api/latest/securitylevel/{levelId}` (GET)
+
+---
+
+- **Implemented all Resolutions Endpoints (`/rest/api/2/status`)**:
+
+    - `/rest/api/latest/status/{statusIdOrName}` (GET)
+    - `/rest/api/latest/status/page` (GET)
 
 ---
 

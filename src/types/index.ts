@@ -1400,3 +1400,9 @@ export interface ColumnItem {
     label: string;
     value: string;
 }
+
+export interface StatusOptions {
+    query?: string;
+    projectIds?: string;
+    issueTypeIds?: string;
+}
