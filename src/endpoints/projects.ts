@@ -586,7 +586,7 @@ export class ProjectEndpoint extends EndpointService {
      * @param {number} [maxResults] Maximum number of matches to return. Zero means a default limit of 100 and negative numbers return no results
      * @returns {Promise<Project[]>} Promise with the requested projects data
      */
-    async search(query: string, maxResults?: number): Promise<ProjectsSearchResult> {
+    async pick(query: string, maxResults?: number): Promise<ProjectsSearchResult> {
         const request = this.doGet({
             param: 'picker'
         });

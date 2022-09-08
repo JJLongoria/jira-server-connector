@@ -377,4 +377,9 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+- **Implemented all Upgrade Endpoints (`/rest/api/2/upgrade`)**:
+
+    - `/rest/api/latest/upgrade` (GET, POST)
+
+---
 

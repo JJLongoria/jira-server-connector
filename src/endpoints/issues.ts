@@ -958,7 +958,7 @@ export class IssueEndpoint extends EndpointService {
     * @param {IssuePickerOptions} [options] Issue picker options
     * @returns {Promise<IssuePickerOutput>} If not throw errors, operation finish successfully
     */
-    async picker(options?: IssuePickerOptions): Promise<IssuePickerOutput> {
+    async pick(options?: IssuePickerOptions): Promise<IssuePickerOutput> {
         const request = this.doPut({
             param: '/picker'
         });

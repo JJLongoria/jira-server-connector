@@ -24,7 +24,7 @@ import { PasswordEndpoint } from "./endpoints/password";
 import { PermissionsEndpoint } from "./endpoints/permissions";
 import { PermissionSchemeEndpoint } from "./endpoints/permissionSchemes";
 import { PriorityEndpoint } from "./endpoints/priorities";
-import { Basic, BasicAuth } from "./types";
+import { Basic, BasicAuth, UpgradeResult } from "./types";
 import { ProjectEndpoint } from "./endpoints/projects";
 import { ProjectCategoryEndpoint } from "./endpoints/projectCategory";
 import { ReindexEndpoint } from "./endpoints/reindex";
@@ -37,6 +37,7 @@ import { SettingsEndpoint } from "./endpoints/settings";
 import { StatusEndpoint } from "./endpoints/status";
 import { StatusCategoryEndpoint } from "./endpoints/statusCategory";
 import { UniversalAvatarEndpoint } from "./endpoints/universalAvatar";
+import { UpgradeEndpoint } from "./endpoints/upgrade";
 
 export * from "./types";
 
@@ -253,6 +254,11 @@ export class JiraServerConnector {
     universalAvatars: UniversalAvatarEndpoint;
 
     /**
+     * Contains all operations from '/rest/api/latest/upgrade'
+     */
+    upgrades: UpgradeEndpoint;
+
+    /**
      * Instance new Jira Server Connector with user credentials and Jira host.
      * @param {BasicAuth} auth Basic Authorization info and Jira host 
      */
@@ -296,6 +302,7 @@ export class JiraServerConnector {
         this.statuses = new StatusEndpoint(this.auth);
         this.statusCategories = new StatusCategoryEndpoint(this.auth);
         this.universalAvatars = new UniversalAvatarEndpoint(this.auth);
+        this.upgrades = new UpgradeEndpoint(this.auth);
     }
 
 

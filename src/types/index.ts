@@ -1406,3 +1406,10 @@ export interface StatusOptions {
     projectIds?: string;
     issueTypeIds?: string;
 }
+
+export interface UpgradeResult {
+    startTime: string;
+    duration: number;
+    outcome: string;
+    message: string;
+}
