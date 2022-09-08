@@ -35,6 +35,7 @@ import { SecurityLevelEndpoint } from "./endpoints/securityLevel";
 import { ServerInfoEndpoint } from "./endpoints/serverInfo";
 import { SettingsEndpoint } from "./endpoints/settings";
 import { StatusEndpoint } from "./endpoints/status";
+import { StatusCategoryEndpoint } from "./endpoints/statusCategory";
 
 export * from "./types";
 
@@ -241,6 +242,11 @@ export class JiraServerConnector {
     statuses: StatusEndpoint;
 
     /**
+     * Contains all operations from '/rest/api/latest/statuscategory'
+     */
+    statusCategories: StatusCategoryEndpoint;
+
+    /**
      * Instance new Jira Server Connector with user credentials and Jira host.
      * @param {BasicAuth} auth Basic Authorization info and Jira host 
      */
@@ -282,6 +288,7 @@ export class JiraServerConnector {
         this.serverInfo = new ServerInfoEndpoint(this.auth);
         this.settings = new SettingsEndpoint(this.auth);
         this.statuses = new StatusEndpoint(this.auth);
+        this.statusCategories = new StatusCategoryEndpoint(this.auth);
     }
 
 

@@ -354,10 +354,17 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-- **Implemented all Resolutions Endpoints (`/rest/api/2/status`)**:
+- **Implemented all Statuses Endpoints (`/rest/api/2/status`)**:
 
     - `/rest/api/latest/status/{statusIdOrName}` (GET)
     - `/rest/api/latest/status/page` (GET)
+
+---
+
+- **Implemented all Status Categories Endpoints (`/rest/api/2/statuscategory`)**:
+
+    - `/rest/api/latest/statuscategory` (GET)
+    - `/rest/api/latest/statuscategory/{categoryIdOrKey}` (GET)
 
 ---
 
