@@ -502,6 +502,12 @@ export interface Project {
     archived: boolean;
 }
 
+export interface ProjectsSearchResult {
+    projects: Project[],
+    total: number;
+    header: string;
+}
+
 export interface ProjectCategory {
     id: string;
     name: string;

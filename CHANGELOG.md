@@ -287,6 +287,10 @@ All notable changes to this project will be documented in this file.
     - `/rest/api/latest/project/{projectIdOrKey}/securitylevel` (GET)
     - `/rest/api/latest/project/{projectIdOrKey}/workflowscheme` (GET)
 
+    ---
+
+    - `/rest/api/latest/projects/picker` (GET)
+
 ---
 
 

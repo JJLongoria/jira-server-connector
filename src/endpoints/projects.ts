@@ -1,4 +1,5 @@
-import { Avatar, AvatarCroping, Basic, Component, EndpointService, IssueTypeStatuses, NotificationScheme, Page, PageOptions, PermissionScheme, Project, ProjectIdentity, ProjectInput, ProjectOptions, ProjectRole, ProjectRoleActorsInput, SecurityLevels, SecurityScheme, Version, WorkflowScheme } from "../types";
+import { StrUtils } from "../core/strUtils";
+import { Avatar, AvatarCroping, Basic, Component, EndpointService, IssueTypeStatuses, NotificationScheme, Page, PageOptions, PermissionScheme, Project, ProjectIdentity, ProjectInput, ProjectOptions, ProjectRole, ProjectRoleActorsInput, ProjectsSearchResult, SecurityLevels, SecurityScheme, Version, WorkflowScheme } from "../types";
 
 
 /**
@@ -574,6 +575,29 @@ export class ProjectEndpoint extends EndpointService {
             this.processOptions(request, options);
             const result = await request.execute();
             return result.data as Project[];
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    /**
+     * Returns a list of projects visible to the user where project name and/or key is matching the given query. Passing an empty (or whitespace only) query will match no projects. The project matches will contain a field with the query highlighted
+     * @param {string} query A sequence of characters expected to be found in the word-prefix of project name and/or key
+     * @param {number} [maxResults] Maximum number of matches to return. Zero means a default limit of 100 and negative numbers return no results
+     * @returns {Promise<Project[]>} Promise with the requested projects data
+     */
+    async search(query: string, maxResults?: number): Promise<ProjectsSearchResult> {
+        const request = this.doGet({
+            param: 'picker'
+        });
+        request.endpoint = StrUtils.replace(request.endpoint, '/project/', '/projects/');
+        try {
+            this.processOptions(request, {
+                query: query,
+                maxResults: maxResults,
+            });
+            const result = await request.execute();
+            return result.data as ProjectsSearchResult;
         } catch (error) {
             throw error;
         }

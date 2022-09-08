@@ -25,6 +25,7 @@ import { PermissionsEndpoint } from "./endpoints/permissions";
 import { PermissionSchemeEndpoint } from "./endpoints/permissionSchemes";
 import { PriorityEndpoint } from "./endpoints/priorities";
 import { Basic, BasicAuth, PermissionScheme } from "./types";
+import { ProjectEndpoint } from "./endpoints/projects";
 
 export * from "./types";
 
@@ -181,6 +182,11 @@ export class JiraServerConnector {
     priorities: PriorityEndpoint;
 
     /**
+     * Contains all operations from '/rest/api/latest/project' and '/rest/api/latest/projects/picker'
+     */
+    projects: ProjectEndpoint;
+
+    /**
      * Instance new Jira Server Connector with user credentials and Jira host.
      * @param {BasicAuth} auth Basic Authorization info and Jira host 
      */
@@ -212,6 +218,7 @@ export class JiraServerConnector {
         this.password = new PasswordEndpoint(this.auth);
         this.permissionSchemes = new PermissionSchemeEndpoint(this.auth);
         this.priorities = new PriorityEndpoint(this.auth);
+        this.projects = new ProjectEndpoint(this.auth);
     }
 
 
