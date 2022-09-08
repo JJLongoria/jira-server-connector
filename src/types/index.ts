@@ -1374,3 +1374,24 @@ export interface IssueSearchOutput {
     total: number;
     issues: Issue[];
 }
+
+export interface ServerInfo {
+    baseUrl: string;
+    version: string;
+    versionNumbers: number[];
+    deploymentType: string;
+    buildNumber: string;
+    buildDate: string;
+    databaseBuildNumber: number;
+    serverTime: string;
+    scmInfo: string;
+    buildPartnerName: string;
+    serverTitle: string;
+    healthChecks: HealthCheck[];
+}
+
+export interface HealthCheck {
+    name: string;
+    description: string;
+    passed: boolean;
+}
