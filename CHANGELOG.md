@@ -315,11 +315,32 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+- **Implemented all Roles Endpoints (`/rest/api/2/resolution`)**:
+
+    - `/rest/api/latest/resolution/{resolutionId}` (GET)
+    - `/rest/api/latest/resolution/page` (GET)
+
+---
+
 - **Implemented all Roles Endpoints (`/rest/api/2/role`)**:
 
     - `/rest/api/latest/role` (GET, POST)
     - `/rest/api/latest/role/{roleId}` (GET, POST, PUT, DELETE)
     - `/rest/api/latest/role/{roleId}/actors` (GET, POST, DELETE)
+
+---
+
+- **Implemented all Screens Endpoints (`/rest/api/2/screens`)**:
+
+    - `/rest/api/latest/screens` (GET)
+    - `/rest/api/latest/screens/{screenId}/availableFields` (GET)
+    - `/rest/api/latest/screens/{screenId}/tabs` (GET, POST)
+    - `/rest/api/latest/screens/{screenId}/tabs/{tabId}` (PUT, DELETE, POST)
+    - `/rest/api/latest/screens/{screenId}/tabs/{tabId}/fields` (POST, GET)
+    - `/rest/api/latest/screens/{screenId}/tabs/{tabId}/fields/{fieldId}` (DELETE)
+    - `/rest/api/latest/screens/{screenId}/tabs/{tabId}/fields/{fieldId}/move` (POST)
+    - `/rest/api/latest/screens/{screenId}/tabs/{tabId}/move/{pos}` (POST)
+    - `/rest/api/latest/screens/addToDefault/{fieldId}` (POST)
 
 ---
 

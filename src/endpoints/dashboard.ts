@@ -130,7 +130,7 @@ export class DashboardEndpoint extends EndpointService {
             const result = await request.execute();
             const data = result.data as DashboardsOutput;
             const page: Page<Dashboard> = new Page();
-            page.isLast === !data.next;
+            page.isLast = (data.startAt + data.maxResults) >= data.total;
             page.nextPage = data.next;
             page.previousPage = data.prev;
             page.maxResults = data.maxResults;

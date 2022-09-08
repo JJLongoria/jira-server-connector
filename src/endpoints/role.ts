@@ -66,11 +66,11 @@ export class RoleActorsEndpoint extends EndpointService {
 export class RoleEndpoint extends EndpointService {
 
     /**
-         * Contains all operations related with projects avatar
-         * All paths and operations from '/rest/api/latest/role/{roleId}/actors'.
-         * @param {string} roleId The Role Id
-         * @returns {RoleActorsEndpoint} Get all operations about projects avatar
-         */
+     * Contains all operations related with projects avatar
+     * All paths and operations from '/rest/api/latest/role/{roleId}/actors'.
+     * @param {string} roleId The Role Id
+     * @returns {RoleActorsEndpoint} Get all operations about projects avatar
+     */
     avatar = (roleId: string) => {
         return new RoleActorsEndpoint(this.auth, roleId);
     };

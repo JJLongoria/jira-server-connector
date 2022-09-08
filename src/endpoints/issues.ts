@@ -22,7 +22,7 @@ export class IssueCommentEndpoint extends EndpointService {
             const result = await request.execute();
             const data = result.data as CommentsOutput;
             const page: Page<Comment> = new Page();
-            page.isLast === (data.startAt + data.maxResults) >= data.total;
+            page.isLast = (data.startAt + data.maxResults) >= data.total;
             //page.nextPage = data.next;
             //page.previousPage = data.prev;
             page.maxResults = data.maxResults;
@@ -437,7 +437,7 @@ export class IssueWorklogEndpoint extends EndpointService {
             const result = await request.execute();
             const data = result.data as IssueWorklogsOutput;
             const page: Page<IssueWorklog> = new Page();
-            page.isLast === (data.startAt + data.maxResults) >= data.total;
+            page.isLast = (data.startAt + data.maxResults) >= data.total;
             //page.nextPage = data.next;
             //page.previousPage = data.prev;
             page.maxResults = data.maxResults;

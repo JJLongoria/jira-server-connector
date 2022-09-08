@@ -1313,3 +1313,50 @@ export interface Resolution extends Self {
     iconUrl: string;
     name: string;
 }
+
+export interface ScreensOutput {
+    startAt: number;
+    maxResults: number;
+    total: number;
+    screens: Screen[];
+}
+
+export interface Screen extends Self {
+    id: number;
+    description: string;
+    name: string;
+    fieldScreenSchemes: ScreenScheme[];
+    fieldScreenWorkflows: ScreenWorkflow[];
+    deletable: boolean;
+    expand: string;
+}
+
+export interface ScreenScheme {
+    id: number;
+    description: string;
+    name: string;
+}
+
+export interface ScreenWorkflow {
+    name: string;
+    actions: ActionDescriptor[];
+    mode: string;
+}
+
+export interface ActionDescriptor {
+    id: number;
+    name: string;
+    firstStep: number;
+    global: boolean;
+}
+
+export interface ScreenableTab {
+    id: number;
+    name: string;
+}
+
+export interface ScreenableField {
+    id: string;
+    name: string;
+    type: string;
+}

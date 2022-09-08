@@ -24,12 +24,13 @@ import { PasswordEndpoint } from "./endpoints/password";
 import { PermissionsEndpoint } from "./endpoints/permissions";
 import { PermissionSchemeEndpoint } from "./endpoints/permissionSchemes";
 import { PriorityEndpoint } from "./endpoints/priorities";
-import { Basic, BasicAuth, PermissionScheme } from "./types";
+import { Basic, BasicAuth } from "./types";
 import { ProjectEndpoint } from "./endpoints/projects";
 import { ProjectCategoryEndpoint } from "./endpoints/projectCategory";
 import { ReindexEndpoint } from "./endpoints/reindex";
 import { RoleEndpoint } from "./endpoints/role";
 import { ResolutionEndpoint } from "./endpoints/resolution";
+import { ScreenEndpoint } from "./endpoints/screens";
 
 export * from "./types";
 
@@ -211,6 +212,11 @@ export class JiraServerConnector {
     resolutions: ResolutionEndpoint;
 
     /**
+     * Contains all operations from '/rest/api/latest/screens'
+     */
+    screens: ScreenEndpoint;
+
+    /**
      * Instance new Jira Server Connector with user credentials and Jira host.
      * @param {BasicAuth} auth Basic Authorization info and Jira host 
      */
@@ -247,6 +253,7 @@ export class JiraServerConnector {
         this.reindex = new ReindexEndpoint(this.auth);
         this.roles = new RoleEndpoint(this.auth);
         this.resolutions = new ResolutionEndpoint(this.auth);
+        this.screens = new ScreenEndpoint(this.auth);
     }
 
 
