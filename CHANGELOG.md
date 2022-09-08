@@ -368,4 +368,13 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+- **Implemented all Universal Avatars Endpoints (`/rest/api/2/universal_avatar`)**:
+
+    - `/rest/api/latest/universal_avatar/type/{type}/owner/{owningObjectId}` (GET)
+    - `/rest/api/latest/universal_avatar/type/{type}/owner/{owningObjectId}/avatar` (POST)
+    - `/rest/api/latest/universal_avatar/type/{type}/owner/{owningObjectId}/avatar/{avatarId}` (DELETE)
+    - `/rest/api/latest/universal_avatar/type/{type}/owner/{owningObjectId}/temp` (POST)
+
+---
+
 
