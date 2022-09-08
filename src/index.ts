@@ -32,6 +32,8 @@ import { RoleEndpoint } from "./endpoints/role";
 import { ResolutionEndpoint } from "./endpoints/resolution";
 import { ScreenEndpoint } from "./endpoints/screens";
 import { SecurityLevelEndpoint } from "./endpoints/securityLevel";
+import { ServerInfoEndpoint } from "./endpoints/serverInfo";
+import { SettingsEndpoint } from "./endpoints/settings";
 
 export * from "./types";
 
@@ -223,6 +225,16 @@ export class JiraServerConnector {
     securityLevels: SecurityLevelEndpoint;
 
     /**
+     * Contains all operations from '/rest/api/latest/serverInfo'
+     */
+    serverInfo: ServerInfoEndpoint;
+
+    /**
+     * Contains all operations from '/rest/api/latest/settingss'
+     */
+    settings: SettingsEndpoint;
+
+    /**
      * Instance new Jira Server Connector with user credentials and Jira host.
      * @param {BasicAuth} auth Basic Authorization info and Jira host 
      */
@@ -261,6 +273,8 @@ export class JiraServerConnector {
         this.resolutions = new ResolutionEndpoint(this.auth);
         this.screens = new ScreenEndpoint(this.auth);
         this.securityLevels = new SecurityLevelEndpoint(this.auth);
+        this.serverInfo = new ServerInfoEndpoint(this.auth);
+        this.settings = new SettingsEndpoint(this.auth);
     }
 
 

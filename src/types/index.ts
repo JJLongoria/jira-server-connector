@@ -1395,3 +1395,8 @@ export interface HealthCheck {
     description: string;
     passed: boolean;
 }
+
+export interface ColumnItem {
+    label: string;
+    value: string;
+}

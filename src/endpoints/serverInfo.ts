@@ -19,7 +19,7 @@ export class ServerInfoEndpoint extends EndpointService {
         try {
             this.processOptions(request, {
                 doHealthCheck: doHealthCheck,
-            })
+            });
             const result = await request.execute();
             return result.data as ServerInfo;
         } catch (error) {
