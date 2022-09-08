@@ -1306,3 +1306,10 @@ export interface ActorInput {
 export interface RoleActors {
     actors: RoleActor[];
 }
+
+export interface Resolution extends Self {
+    id: string;
+    description: string;
+    iconUrl: string;
+    name: string;
+}

@@ -29,6 +29,7 @@ import { ProjectEndpoint } from "./endpoints/projects";
 import { ProjectCategoryEndpoint } from "./endpoints/projectCategory";
 import { ReindexEndpoint } from "./endpoints/reindex";
 import { RoleEndpoint } from "./endpoints/role";
+import { ResolutionEndpoint } from "./endpoints/resolution";
 
 export * from "./types";
 
@@ -205,6 +206,11 @@ export class JiraServerConnector {
     roles: RoleEndpoint;
 
     /**
+     * Contains all operations from '/rest/api/latest/resolution'
+     */
+    resolutions: ResolutionEndpoint;
+
+    /**
      * Instance new Jira Server Connector with user credentials and Jira host.
      * @param {BasicAuth} auth Basic Authorization info and Jira host 
      */
@@ -240,6 +246,7 @@ export class JiraServerConnector {
         this.projectCategories = new ProjectCategoryEndpoint(this.auth);
         this.reindex = new ReindexEndpoint(this.auth);
         this.roles = new RoleEndpoint(this.auth);
+        this.resolutions = new ResolutionEndpoint(this.auth);
     }
 
 
