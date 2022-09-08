@@ -10,6 +10,7 @@
     "compile": "tsc -p ./ ",
     "lint": "eslint src --ext ts",
     "lint-fix": "eslint src --ext ts --fix",
+    "prepublish": "npm run compile",
     "watch": "tsc -watch -p ./",
     "test": "jest --coverage --runInBand"
   },

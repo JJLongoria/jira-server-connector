@@ -1263,3 +1263,37 @@ export interface ErrorCollection {
     errorMessages: string[];
     errors: { [key: string]: string };
 }
+
+export interface Reindex {
+    progressUrl: string;
+    currentProgress: number;
+    currentSubTask: string;
+    type: 'FOREGROUND' | 'BACKGROUND' | 'BACKGROUND_PREFFERED';
+    submittedTime: string;
+    startTime: string;
+    finishTime: string;
+    success: boolean;
+}
+
+export interface ReindexOptions {
+    type?: 'FOREGROUND' | 'BACKGROUND' | 'BACKGROUND_PREFFERED';
+    indexComments?: boolean;
+    indexChangeHistory?: boolean;
+    indexWorklogs?: boolean;
+}
+
+export interface ReindexIssuesOptions {
+    issueId: string;
+    indexComments?: boolean;
+    indexChangeHistory?: boolean;
+    indexWorklogs?: boolean;
+}
+
+export interface ReindexRequest {
+    id: number;
+    status: 'PENDING' | 'ACTIVE' | 'RUNNING' | 'FAILED' | 'COMPLETE';
+    type: 'IMMEDIATE' | 'DELAYED';
+    requestTime: string;
+    startTime: string;
+    completionTime: string;
+}

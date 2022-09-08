@@ -304,5 +304,16 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+- **Implemented all Reindex Endpoints (`/rest/api/2/reindex`)**:
+
+    - `/rest/api/latest/reindex` (GET, POST)
+    - `/rest/api/latest/reindex/issue` (POST)
+    - `/rest/api/latest/reindex/progress` (GET)
+    - `/rest/api/latest/reindex/request/request` (POST)
+    - `/rest/api/latest/reindex/request/{requestId}` (GET)
+    - `/rest/api/latest/reindex/request/bulk` (GET)
+
+---
+
 
 
