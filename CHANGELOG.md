@@ -249,7 +249,7 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-- **Implemented all Permission Scheme Endpoints (`/rest/api/latest/GET /rest/api/2/permissionscheme`)**:
+- **Implemented all Permission Scheme Endpoints (`/rest/api/2/permissionscheme`)**:
 
     - `/rest/api/latest/permissionscheme` (GET, POST)
     - `/rest/api/latest/permissionscheme/{schemeId}` (GET, PUT, DELETE)
@@ -258,14 +258,14 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-- **Implemented all Priority Endpoints (`/rest/api/latest/GET /rest/api/2/priority`)**:
+- **Implemented all Priority Endpoints (`/rest/api/2/priority`)**:
 
     - `/rest/api/latest/priority` (GET)
     - `/rest/api/latest/priority/{priorityId}` (GET)
 
 ---
 
-- **Implemented all Project Endpoints (`/rest/api/latest/GET /rest/api/2/project`)**:
+- **Implemented all Project Endpoints (`/rest/api/2/project`, `/rest/api/latest/projects/picker` and `/rest/api/latest/projectvalidate/key`)**:
 
     - `/rest/api/latest/project` (GET, PUT)
     - `/rest/api/latest/project/{projectIdOrKey}` (GET, PUT, DELETE)
@@ -290,6 +290,17 @@ All notable changes to this project will be documented in this file.
     ---
 
     - `/rest/api/latest/projects/picker` (GET)
+
+    ---
+
+    `/rest/api/latest/projectvalidate/key` (GET)
+
+---
+
+- **Implemented all Project Category Endpoints (`/rest/api/2/projectCategory`)**:
+
+    - `/rest/api/latest/projectCategory` (GET, POST)
+    - `/rest/api/latest/projectCategory/{categoryId}` (GET, PUT, DELETE)
 
 ---
 

@@ -508,8 +508,13 @@ export interface ProjectsSearchResult {
     header: string;
 }
 
-export interface ProjectCategory {
+export interface ProjectCategory extends Self {
     id: string;
+    name: string;
+    description: string;
+}
+
+export interface ProjectCategoryInput {
     name: string;
     description: string;
 }
