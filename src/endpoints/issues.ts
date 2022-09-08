@@ -1,5 +1,5 @@
 import { StrUtils } from "../core/strUtils";
-import { Basic, Comment, CommentsOutput, EditMeta, EndpointService, Issue, IssueLink, IssueLinks, IssueNotification, IssueOptions, IssueRemoteLink, IssueTransition, IssueTransitions, IssueUpdate, IssueVotes, IssueWatchers, IssueWorklog, IssueCreateWorklogsOptions, IssueWorklogsOutput, IssueUpdateWorklogsOptions, CreateMeta, Page, FieldMeta, IssuePickerOutput, IssuePickerOptions, Attachment, PageOptions, SearchIssuesOptions } from "../types";
+import { Basic, Comment, CommentsOutput, EditMeta, EndpointService, Issue, IssueLink, IssueLinks, IssueNotification, IssueOptions, IssueRemoteLink, IssueTransition, IssueTransitions, IssueUpdate, IssueVotes, IssueWatchers, IssueWorklog, IssueCreateWorklogsOptions, IssueWorklogsOutput, IssueUpdateWorklogsOptions, CreateMeta, Page, FieldMeta, IssuePickerOutput, IssuePickerOptions, Attachment, PageOptions, SearchIssuesOptions, IssueSearchOutput } from "../types";
 
 /**
  * Class to manage and expose all endpoints and operations below '/rest/api/latest/issue/{issueIdOrKey}/comment'
@@ -981,7 +981,16 @@ export class IssueEndpoint extends EndpointService {
         try {
             request.endpoint = StrUtils.replace(request.endpoint, '/issue', '/search');
             const result = await request.execute();
-            return result.data as Page<Issue>;
+            const data = result.data as IssueSearchOutput;
+            const page: Page<Issue> = new Page();
+            page.isLast = (data.startAt + data.maxResults) >= data.total;
+            page.maxResults = data.maxResults;
+            page.self = request.endpoint;
+            page.startAt = data.startAt;
+            page.total = data.total;
+            page.values = data.issues;
+            page.nextPageStart = (!page.isLast && !page.nextPage) ? (page.startAt + page.maxResults) : undefined;
+            return page;
         } catch (error) {
             throw error;
         }

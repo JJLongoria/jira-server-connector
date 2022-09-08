@@ -348,5 +348,10 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+- **Implemented all Security Levels Endpoints (`/rest/api/2/securitylevel`)**:
+
+    - `/rest/api/latest/securitylevel/{levelId}` (GET)
+
+---
 
 

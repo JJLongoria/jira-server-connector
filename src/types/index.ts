@@ -1235,10 +1235,10 @@ export interface ProjectRoleActorsInput {
 }
 
 export interface SecurityLevels {
-    levels: Securitylevel[];
+    levels: SecurityLevel[];
 }
 
-export interface Securitylevel extends Self {
+export interface SecurityLevel extends Self {
     id: string;
     description: string;
     name: string;
@@ -1366,4 +1366,11 @@ export interface SearchIssuesOptions {
     startAt?: number;
     maxResults?: number;
     fields?: string[];
+}
+
+export interface IssueSearchOutput {
+    startAt: number;
+    maxResults: number;
+    total: number;
+    issues: Issue[];
 }
