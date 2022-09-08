@@ -1,5 +1,5 @@
 import { StrUtils } from "../core/strUtils";
-import { Avatar, AvatarCroping, Basic, Component, EndpointService, IssueTypeStatuses, NotificationScheme, Page, PageOptions, PermissionScheme, Project, ProjectIdentity, ProjectInput, ProjectOptions, ProjectRole, ProjectRoleActorsInput, ProjectsSearchResult, SecurityLevels, SecurityScheme, Version, WorkflowScheme } from "../types";
+import { Avatar, AvatarCroping, Basic, Component, EndpointService, ErrorCollection, IssueTypeStatuses, NotificationScheme, Page, PageOptions, PermissionScheme, Project, ProjectIdentity, ProjectInput, ProjectOptions, ProjectRole, ProjectRoleActorsInput, ProjectsSearchResult, SecurityLevels, SecurityScheme, Version, WorkflowScheme } from "../types";
 
 
 /**
@@ -598,6 +598,27 @@ export class ProjectEndpoint extends EndpointService {
             });
             const result = await request.execute();
             return result.data as ProjectsSearchResult;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    /**
+     * Validates a project key
+     * @param {string} projectKey The project key to validate
+     * @returns {Promise<Project[]>} Promise with ErrorCollection containing any validation errors for the project key.
+     */
+    async validateKey(projectKey: string): Promise<ErrorCollection> {
+        const request = this.doGet({
+            param: 'key'
+        });
+        request.endpoint = StrUtils.replace(request.endpoint, '/project/', '/projectvalidate/');
+        try {
+            this.processOptions(request, {
+                key: projectKey,
+            });
+            const result = await request.execute();
+            return result.data as ErrorCollection;
         } catch (error) {
             throw error;
         }

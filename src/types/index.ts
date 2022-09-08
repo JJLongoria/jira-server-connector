@@ -1253,3 +1253,8 @@ export interface WorkflowScheme extends Self {
     updateDraftIfNeeded: boolean;
     issueTypes: { [key: string]: IssueType };
 }
+
+export interface ErrorCollection {
+    errorMessages: string[];
+    errors: { [key: string]: string };
+}
