@@ -383,3 +383,27 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+- **Implemented all User Endpoints (`/rest/api/2/user`)**:
+
+    - `/rest/api/latest/user` (GET, POST, PUT, DELETE)
+    - `/rest/api/latest/user/application` (POST, DELETE)
+    - `/rest/api/latest/assignable/multiProjectSearch` (GET)
+    - `/rest/api/latest/assignable/search` (GET)
+    - `/rest/api/latest/avatar` (POST, PUT)
+    - `/rest/api/latest/avatar/temporary` (POST)
+    - `/rest/api/latest/avatar/{avatarId}` (DELETE)
+    - `/rest/api/latest/user/avatars` (GET)
+    - `/rest/api/latest/user/columns` (GET, PUT, DELETE)
+    - `/rest/api/latest/user/password` (PUT)
+    - `/rest/api/latest/user/picker` (GET)
+    - `/rest/api/latest/user/search` (GET)
+    - `/rest/api/latest/user/a11y/personal-settings` (GET)
+    - `/rest/api/latest/user/anonymization` (GET, POS)
+    - `/rest/api/latest/user/anonymization/rerun` (GET, POST)
+    - `/rest/api/latest/user/anonymization/progress` (GET)
+    - `/rest/api/latest/user/anonymization/unlock` (DELETE)
+    - `/rest/api/latest/user/properties` (GET)
+    - `/rest/api/latest/user/properties/{propertyKey}` (GET, PUT, DELETE)
+
+---
+

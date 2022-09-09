@@ -121,6 +121,7 @@ export class JiraError extends Error {
     status?: string;
     statusText?: string;
     errors?: JiraErrorData[];
+    raw: any;
 
     constructor(error: AxiosError) {
         super(error.message);
@@ -131,6 +132,7 @@ export class JiraError extends Error {
         this.statusText = error.response?.statusText;
         if (error.response && error.response.data) {
             const data = error.response.data as any;
+            this.raw = data;
             if (data.errors) {
                 this.errors = data.errors as JiraErrorData[];
             }
@@ -1412,4 +1414,115 @@ export interface UpgradeResult {
     duration: number;
     outcome: string;
     message: string;
+}
+
+export interface UserInput {
+    key: string;
+    name: string;
+    password: string;
+    emailAddress: string;
+    displayName: string;
+    notification: string;
+    active: boolean;
+    applicationKeys: { [key: string]: string };
+}
+
+
+export interface AssignableUserOptions {
+    username?: string;
+    project?: string;
+    issueKey?: string;
+    emailAddress?: string;
+    maxResults?: number;
+    actionDescriptorId?: number;
+}
+
+export interface AssignableMultiProjectOptions {
+    username?: string;
+    projectKeys?: string;
+    maxResults?: number;
+}
+
+export interface UserPickerOptions {
+    query?: string;
+    exclude?: string;
+    maxResults?: number;
+    showAvatar?: boolean;
+}
+
+export interface UserPickerOutput {
+    users: UserPicker[];
+    header: string;
+    total: number;
+}
+
+export interface UserPicker {
+    name: string;
+    key: string;
+    html: string;
+    displayName: string;
+    avatarUrl: string;
+}
+
+export interface UserSearchOptions {
+    username?: string;
+    startAt?: number;
+    maxResults?: number;
+    includeActive?: boolean;
+    includeInactive?: boolean;
+}
+
+export interface A11YPersonalSettings {
+    key: string;
+    label: string;
+    description: string;
+    image: A11YPersonalSettingsImage;
+    enabled: boolean;
+}
+
+export interface A11YPersonalSettingsImage {
+    url: string;
+    altText: string;
+}
+
+export interface AnonymizationValidateOutput {
+    errors: { [key: string]: ErrorCollection };
+    warnings: { [key: string]: ErrorCollection };
+    expand: string;
+    userKey: string;
+    userName: string;
+    deleted: boolean;
+    email: string;
+    success: boolean;
+    affectedEntities: { [key: string]: AffectedEntity };
+    operations: string[];
+    businessLogicValidationFailed: boolean;
+
+}
+
+export interface AffectedEntity {
+    type: 'ANONYMIZE' | 'TRANSFER_OWNERSHIP' | 'REMOVE' | 'MANUAL';
+    description: string;
+    numberOfOccurrences: number;
+    uriDisplayName: string;
+    uri: string;
+}
+
+export interface AnonymizationProgressOutput {
+    errors: { [key: string]: ErrorCollection };
+    warnings: { [key: string]: ErrorCollection };
+    expand: string;
+    userKey: string;
+    userName: string;
+    fullName: string;
+    progressUrl: string;
+    currentProgress: number;
+    currentSubTask: string;
+    submittedTime: string;
+    startTime: string;
+    finishTime: string;
+    operations: string[];
+    status: 'COMPLETED' | 'INTERRUPTED' | 'IN_PROGRESS' | 'VALIDATION_FAILED';
+    executingNode: string;
+    isRerun: boolean;
 }

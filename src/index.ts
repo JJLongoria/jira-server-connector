@@ -38,6 +38,7 @@ import { StatusEndpoint } from "./endpoints/status";
 import { StatusCategoryEndpoint } from "./endpoints/statusCategory";
 import { UniversalAvatarEndpoint } from "./endpoints/universalAvatar";
 import { UpgradeEndpoint } from "./endpoints/upgrade";
+import { UserEndpoint } from "./endpoints/user";
 
 export * from "./types";
 
@@ -259,6 +260,11 @@ export class JiraServerConnector {
     upgrades: UpgradeEndpoint;
 
     /**
+     * Contains all operations from '/rest/api/latest/user'
+     */
+    users: UserEndpoint;
+
+    /**
      * Instance new Jira Server Connector with user credentials and Jira host.
      * @param {BasicAuth} auth Basic Authorization info and Jira host 
      */
@@ -303,6 +309,7 @@ export class JiraServerConnector {
         this.statusCategories = new StatusCategoryEndpoint(this.auth);
         this.universalAvatars = new UniversalAvatarEndpoint(this.auth);
         this.upgrades = new UpgradeEndpoint(this.auth);
+        this.users = new UserEndpoint(this.auth);
     }
 
 

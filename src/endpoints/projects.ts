@@ -134,7 +134,7 @@ export class ProjectAvatarEndpoint extends EndpointService {
     }
 
     /**
-     * Converts the temporary avatar into the final one. This is step 2/3 of changing an avatar for a project
+     * Converts the temporary avatar into the final one. This is step 2/3 of changing an avatar for a user
      * @param {AvatarCroping} cropingData The croping data to create
      * @returns {Promise<Avatar>} Promise with the cropped avatar data
      */
@@ -151,14 +151,14 @@ export class ProjectAvatarEndpoint extends EndpointService {
     }
 
     /**
-    * Updates an avatar for a project. This is step 3/3 of changing an avatar for a project.
+    * Updates an avatar for a user. This is step 3/3 of changing an avatar for a user.
     * @param {Avatar} avatar The avatar to update
     * @returns {Promise<void>} If not throw errors, operation finish sucessfully
     */
     async update(avatar: Avatar): Promise<void> {
         const request = this.doPut({
             param: 'avatar'
-        }).asFile().withBody(avatar);
+        }).asJson().withBody(avatar);
         try {
             const result = await request.execute();
             return;
@@ -168,14 +168,14 @@ export class ProjectAvatarEndpoint extends EndpointService {
     }
 
     /**
-    * Uploads an image and creates a temporary avatar. This is step 1/3 of changing an avatar for a project. Supported image formats: BMP, GIF, JPEG, PNG and WBMP
+    * Uploads an image and creates a temporary avatar. This is step 1/3 of changing an avatar for a user. Supported image formats: BMP, GIF, JPEG, PNG and WBMP
     * @param {string} filename Name of file being uploaded
     * @param {string} size Size of file
     * @returns {Promise<AvatarCroping>} Promise with the avatar cropping instructions
     */
     async upload(filename: string, size: number): Promise<AvatarCroping> {
         const request = this.doPost({
-            param: 'avatar/temporary'
+            param: 'temporary'
         }).asFile().withBody(filename);
         try {
             request.addQueryParam('filename', filename);
@@ -194,7 +194,7 @@ export class ProjectAvatarEndpoint extends EndpointService {
     */
     async delete(avatarId: string): Promise<void> {
         const request = this.doDelete({
-            param: 'avatar/' + avatarId
+            param: avatarId
         });
         try {
             const result = await request.execute();
