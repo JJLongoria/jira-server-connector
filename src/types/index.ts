@@ -1597,3 +1597,28 @@ export interface VersionFieldUsage {
 export interface UnresolvedVersionIssueCounts extends Self {
     issuesUnresolvedCount: number;
 }
+
+export interface WorkflowSchemeInput extends Self {
+    name: string;
+    description: string;
+    defaultWorkflow: string;
+    issueTypeMappings: { [key: string]: string };
+}
+
+export interface WorkflowDefault extends Self {
+    workflow: string;
+    updateDraftIfNeeded?: boolean;
+}
+
+export interface IssueTypeMapping extends Self {
+    issueType: string;
+    workflow: string;
+    updateDraftIfNeeded?: boolean;
+}
+
+export interface WorkflowMapping extends Self {
+    issueTypes: string[];
+    workflow: string;
+    defaultMapping: boolean;
+    updateDraftIfNeeded?: boolean;
+}

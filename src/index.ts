@@ -40,6 +40,8 @@ import { UniversalAvatarEndpoint } from "./endpoints/universalAvatar";
 import { UpgradeEndpoint } from "./endpoints/upgrade";
 import { UserEndpoint } from "./endpoints/user";
 import { VersionEndpoint } from "./endpoints/version";
+import { WorkflowEndpoint } from "./endpoints/workflow";
+import { WorkflowSchemeEndpoint } from "./endpoints/workflowScheme";
 
 export * from "./types";
 
@@ -271,6 +273,16 @@ export class JiraServerConnector {
     versions: VersionEndpoint;
 
     /**
+     * Contains all operations from '/rest/api/latest/workflow'
+     */
+    workflows: WorkflowEndpoint;
+
+    /**
+     * Contains all operations from '/rest/api/latest/workflowscheme'
+     */
+    workflowSchemes: WorkflowSchemeEndpoint;
+
+    /**
      * Instance new Jira Server Connector with user credentials and Jira host.
      * @param {BasicAuth} auth Basic Authorization info and Jira host 
      */
@@ -317,6 +329,8 @@ export class JiraServerConnector {
         this.upgrades = new UpgradeEndpoint(this.auth);
         this.users = new UserEndpoint(this.auth);
         this.versions = new VersionEndpoint(this.auth);
+        this.workflows = new WorkflowEndpoint(this.auth);
+        this.workflowSchemes = new WorkflowSchemeEndpoint(this.auth);
     }
 
 

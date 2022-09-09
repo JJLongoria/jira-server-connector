@@ -426,3 +426,18 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+- **Implemented all Workflow Endpoints (`/rest/api/2/workflowscheme`)**:
+
+    - `/rest/api/latest/workflowscheme` (POST)
+    - `/rest/api/latest/workflowscheme/{schemeId}` (GET, PUT, DELETE)
+    - `/rest/api/latest/workflowscheme/{schemeId}/createdraft` (POST)
+    - `/rest/api/latest/workflowscheme/{schemeId}/default` (GET, PUT, DELETE)
+    - `/rest/api/latest/workflowscheme/{schemeId}/draft` (GET, PUT, DELETE)
+    - `/rest/api/latest/workflowscheme/{schemeId}/draft/default` (GET, PUT, DELETE)
+    - `/rest/api/latest/workflowscheme/{schemeId}/draft/issueType/{issueTypeId}` (GET, PUT, DELETE)
+    - `/rest/api/latest/workflowscheme/{schemeId}/draft/workflow` (GET, PUT, DELETE)
+    - `/rest/api/latest/workflowscheme/{schemeId}/issueType/{issueTypeId}` (GET, PUT, DELETE)
+    - `/rest/api/latest/workflowscheme/{schemeId}/workflow` (GET, PUT, DELETE)
+
+---
+
