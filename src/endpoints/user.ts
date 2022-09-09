@@ -109,7 +109,7 @@ export class UserAvatarEndpoint extends EndpointService {
     private username: string;
 
     constructor(auth: Basic, username: string) {
-        super(auth, 'avatar');
+        super(auth, '/avatar');
         this.username = username;
     }
 
@@ -221,7 +221,7 @@ export class UserColumnsEndpoint extends EndpointService {
     private username: string;
 
     constructor(auth: Basic, username: string) {
-        super(auth, 'columns');
+        super(auth, '/columns');
         this.username = username;
     }
 
@@ -287,7 +287,7 @@ export class UserColumnsEndpoint extends EndpointService {
 export class UserAccessibilityEndpoint extends EndpointService {
 
     constructor(auth: Basic) {
-        super(auth, 'a11y');
+        super(auth, '/a11y');
     }
 
     /**
@@ -314,7 +314,7 @@ export class UserAnonymizationEndpoint extends EndpointService {
     private userKey: string;
 
     constructor(auth: Basic, userKey: string) {
-        super(auth, 'anonymization');
+        super(auth, '/anonymization');
         this.userKey = userKey;
     }
 
@@ -457,7 +457,7 @@ export class UserAnonymizationEndpoint extends EndpointService {
 export class UserPropertiesEndpoint extends EndpointService {
 
     constructor(auth: Basic) {
-        super(auth, 'properties');
+        super(auth, '/properties');
     }
 
     /**

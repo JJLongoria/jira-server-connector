@@ -407,3 +407,15 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+- **Implemented all Version Endpoints (`/rest/api/2/version`)**:
+
+    - `/rest/api/latest/version` (GET, POST)
+    - `/rest/api/latest/version/{versionId}` (GET, PUT, DELETE)
+    - `/rest/api/latest/version/{versionId}/move` (POST)
+    - `/rest/api/latest/version/{versionId}/mergeto/{moveIssuesTo}` (PUT)
+    - `/rest/api/latest/version/{versionId}/relatedIssueCounts` (GET)
+    - `/rest/api/latest/version/{versionId}/unresolvedIssueCount` (GET)
+    - `/rest/api/latest/version/{versionId}/remotelink` (GET, DELETE)
+
+---
+

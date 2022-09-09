@@ -463,7 +463,11 @@ export interface SimpleLink {
     weight: number;
 }
 
-export interface RemoteEntityLink {
+export interface RemoteEntityLinks {
+    links: RemoteEntityLink[];
+}
+
+export interface RemoteEntityLink extends Self {
     name: string;
     link: any;
 }
@@ -482,6 +486,20 @@ export interface Version {
     moveUnfixedIssuesTo: string;
     operations: SimpleLink[];
     remotelinks: RemoteEntityLink[];
+}
+
+export interface VersionInput {
+    description?: string;
+    name?: string;
+    archived?: boolean;
+    released?: boolean;
+    releaseDate?: boolean;
+    overdue?: boolean;
+    userStartDate?: string;
+    userReleaseDate?: string;
+    project?: string;
+    projectId?: number;
+    moveUnfixedIssuesTo?: string;
 }
 
 export interface Project {
@@ -1525,4 +1543,28 @@ export interface AnonymizationProgressOutput {
     status: 'COMPLETED' | 'INTERRUPTED' | 'IN_PROGRESS' | 'VALIDATION_FAILED';
     executingNode: string;
     isRerun: boolean;
+}
+
+export interface VersionOptions {
+    startAt?: number;
+    maxResults?: number;
+    query?: string;
+    projectIds?: string;
+}
+
+export interface VersionIssueCounts extends Self {
+    issuesFixedCount: number;
+    issuesAffectedCount: number;
+    issueCountWithCustomFieldsShowingVersion: number;
+    customFieldUsage: VersionFieldUsage[];
+}
+
+export interface VersionFieldUsage {
+    fieldName: string;
+    customFieldId: number;
+    issueCountWithVersionInCustomField: number;
+}
+
+export interface UnresolvedVersionIssueCounts extends Self {
+    issuesUnresolvedCount: number;
 }
