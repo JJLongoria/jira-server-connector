@@ -417,6 +417,12 @@ export interface EntityProperty {
     value: any;
 }
 
+export interface Property {
+    id: string;
+    key: string;
+    value: any;
+}
+
 export interface Field {
     id: string;
     name: string;
@@ -1262,6 +1268,29 @@ export interface SecurityLevel extends Self {
     id: string;
     description: string;
     name: string;
+}
+
+export interface Workflow extends Self {
+    name: string;
+    description: string;
+    lastModifiedDate: string;
+    lastModifiedUser: string;
+    steps: number;
+    isDefault: boolean;
+}
+
+export interface WorkflowPropertyInput {
+    key: string;
+    workflowName: string;
+    workflowMode: string;
+    value: string;
+}
+
+export interface WorkflowPropertyOptions {
+    key: string;
+    workflowName: string;
+    workflowMode: string;
+    includeReservedKeys: boolean;
 }
 
 export interface WorkflowScheme extends Self {

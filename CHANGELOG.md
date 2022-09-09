@@ -419,3 +419,10 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+- **Implemented all Workflow Endpoints (`/rest/api/2/workflow`)**:
+
+    - `/rest/api/latest/workflow` (GET)
+    - `/rest/api/latest/workflow/{workflowId}/properties` (GET, PUT, POST, DELETE)
+
+---
+
