@@ -733,6 +733,17 @@ export interface IssueInput {
 
 }
 
+export interface IssueTransitionInput {
+    transition: {
+        id: string,
+    };
+    fields?: { [key: string]: any };
+    update?: { [key: string]: any[] };
+    historyMetadata?: HistoryMetadata;
+    properties?: EntityProperty[];
+
+}
+
 export interface IssueLink extends Self {
     id: string;
     key: string;
@@ -778,17 +789,16 @@ export interface JsonType {
 }
 
 export interface IssueTransition {
-    id?: string;
+    id: string;
     name: string;
     opsbarSequence: number;
     to: Status;
     fields: { [key: string]: FieldMeta };
-    expand?: string;
+    expand: string;
 }
 
-
 export interface Status extends Self {
-    id?: string;
+    id: string;
     statusColor: string;
     description: string;
     iconUrl: string;
@@ -797,7 +807,7 @@ export interface Status extends Self {
 }
 
 export interface StatusCategory extends Self {
-    id?: string;
+    id: string;
     key: string;
     colorName: string;
     name: string;
@@ -998,7 +1008,7 @@ export interface IssueWorklogsOutput {
 }
 
 export interface IssueCreateWorklogsOptions {
-    adjustEstimate?: string;
+    adjustEstimate?: 'new' | 'leave' | 'manual' | 'auto';
     newEstimate?: string;
     reduceBy?: string;
 }
@@ -1015,28 +1025,35 @@ export interface IssueDeleteWorklogsOptions {
 }
 
 export interface IssueWorklog extends Self {
-    id?: string;
-    author?: User;
-    updateAuthor?: User;
+    id: string;
+    author: User;
+    updateAuthor: User;
     comment: string;
-    created?: string;
-    updated?: string;
+    created: string;
+    updated: string;
     visibility: Visibility;
     started: string;
-    timeSpent?: string;
+    timeSpent: string;
     timeSpentSeconds: number;
-    issueId?: string;
+    issueId: string;
+}
+
+export interface IssueWorklogInput {
+    comment: string;
+    visibility: Visibility;
+    started: string;
+    timeSpentSeconds: number;
 }
 
 export interface CreateMeta extends Self {
-    id?: string;
+    id: string;
     description: string;
-    iconUrl?: string;
+    iconUrl: string;
     name: string;
     subtask: boolean;
-    avatarId?: number;
-    expand?: string;
-    fields?: { [key: string]: FieldMeta };
+    avatarId: number;
+    expand: string;
+    fields: { [key: string]: FieldMeta };
 
 }
 
@@ -1069,18 +1086,31 @@ export interface IssuePickerSection {
     issues: IssuePicker[];
 }
 
-export interface IssueLink {
-    type?: IssueLinkType;
-    inwardIssue?: IssueReference;
-    outwardIssue?: IssueReference;
+export interface LinkIssueRequest {
+    type: {
+        name: string,
+    };
+    inwardIssue: {
+        key: string,
+    };
+    outwardIssue: {
+        key: string,
+    };
+    comment?: CommentInput;
+}
+
+export interface LinkIssue {
+    type: IssueLinkType;
+    inwardIssue: IssueReference;
+    outwardIssue: IssueReference;
     comment?: Comment;
 }
 
 export interface IssueReference {
-    id?: string;
+    id: string;
     key: string;
-    fields?: IssueReferenceFields;
-    user?: User;
+    fields: IssueReferenceFields;
+    user: User;
 }
 
 export interface IssueReferenceFields {
@@ -1091,8 +1121,8 @@ export interface IssueReferenceFields {
 }
 
 export interface Priority {
-    id?: string;
-    statusColor?: string;
+    id: string;
+    statusColor: string;
     description: string;
     iconUrl: string;
     name: string;
@@ -1103,7 +1133,13 @@ export interface IssueLinkTypes {
 }
 
 export interface IssueLinkType extends Self {
-    id?: string;
+    id: string;
+    name: string;
+    inward: string;
+    outward: string;
+}
+
+export interface IssueLinkTypeInput {
     name: string;
     inward: string;
     outward: string;
@@ -1478,6 +1514,8 @@ export interface SearchIssuesOptions {
     jql: string;
     startAt?: number;
     maxResults?: number;
+    expand?: string;
+    validateQuery?: boolean;
     fields?: string[];
 }
 

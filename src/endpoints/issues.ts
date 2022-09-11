@@ -1,5 +1,5 @@
 import { StrUtils } from "../core/strUtils";
-import { Basic, Comment, CommentsOutput, EditMeta, EndpointService, Issue, IssueLink, IssueLinks, IssueNotification, IssueOptions, IssueRemoteLink, IssueTransition, IssueTransitions, IssueInput, IssueVotes, IssueWatchers, IssueWorklog, IssueCreateWorklogsOptions, IssueWorklogsOutput, IssueUpdateWorklogsOptions, CreateMeta, Page, FieldMeta, IssuePickerOutput, IssuePickerOptions, Attachment, PageOptions, SearchIssuesOptions, IssueSearchOutput, CommentInput } from "../types";
+import { Basic, Comment, CommentsOutput, EditMeta, EndpointService, Issue, IssueLink, IssueLinks, IssueNotification, IssueOptions, IssueRemoteLink, IssueTransition, IssueTransitions, IssueInput, IssueVotes, IssueWatchers, IssueWorklog, IssueCreateWorklogsOptions, IssueWorklogsOutput, IssueUpdateWorklogsOptions, CreateMeta, Page, FieldMeta, IssuePickerOutput, IssuePickerOptions, Attachment, PageOptions, SearchIssuesOptions, IssueSearchOutput, CommentInput, IssueTransitionInput, IssueWorklogInput, IssueDeleteWorklogsOptions } from "../types";
 
 /**
  * Class to manage and expose all endpoints and operations below '/rest/api/latest/issue/{issueIdOrKey}/comment'
@@ -295,7 +295,7 @@ export class IssueTransitionEndpoint extends EndpointService {
     * @param {string} [expand] Parameters to expand
     * @returns {Promise<void>} If not throw errors, operation finish successfully
     */
-    async execute(issueUpdateData: IssueInput, expand?: string): Promise<void> {
+    async execute(issueUpdateData: IssueTransitionInput, expand?: string): Promise<void> {
         const request = this.doPost().asJson().withBody(issueUpdateData);
         try {
             if (expand) {
@@ -451,6 +451,7 @@ export class IssueWorklogEndpoint extends EndpointService {
             page.total = data.total;
             page.values = data.worklogs;
             page.nextPageStart = (!page.isLast && !page.nextPage) ? (page.startAt + page.maxResults) : undefined;
+            this.processPage(page);
             return page as Page<IssueWorklog>;
         } catch (error) {
             throw error;
@@ -463,7 +464,7 @@ export class IssueWorklogEndpoint extends EndpointService {
     * @param {IssueCreateWorklogsOptions} [options] Options to create worklog
     * @returns {Promise<void>} Promise with the created worklog data
     */
-    async create(worklogData: IssueWorklog, options?: IssueCreateWorklogsOptions): Promise<IssueWorklog> {
+    async create(worklogData: IssueWorklogInput, options?: IssueCreateWorklogsOptions): Promise<IssueWorklog> {
         const request = this.doPost().withBody(worklogData);
         try {
             this.processOptions(request, options);
@@ -498,7 +499,7 @@ export class IssueWorklogEndpoint extends EndpointService {
     * @param {IssueUpdateWorklogsOptions} [options] Options to update worklog
     * @returns {Promise<IssueWorklog>} Promise with the updated worklog data
     */
-    async update(worklogId: string, worklogData: IssueWorklog, options?: IssueUpdateWorklogsOptions): Promise<IssueWorklog> {
+    async update(worklogId: string, worklogData: IssueWorklogInput, options?: IssueUpdateWorklogsOptions): Promise<IssueWorklog> {
         const request = this.doPut({
             param: worklogId
         }).withBody(worklogData);
@@ -517,7 +518,7 @@ export class IssueWorklogEndpoint extends EndpointService {
     * @param {IssueUpdateWorklogsOptions} [options] Options to delete worklog
     * @returns {Promise<void>} If not throw errors, operation finish successfully
     */
-    async delete(worklogId: string, options?: IssueUpdateWorklogsOptions): Promise<void> {
+    async delete(worklogId: string, options?: IssueDeleteWorklogsOptions): Promise<void> {
         const request = this.doDelete({
             param: worklogId
         });
@@ -564,21 +565,15 @@ export class IssueCreateMetaEndpoint extends EndpointService {
     * Returns the metadata for issue types used for creating issues. Data will not be returned if the user does not have permission to create issues in that project.
     * @param {string} projectIdOrKey The project id or key
     * @param {string} issueTypeId The issue type id
-    * @param {number} [startAt] The page offset, if not specified then defaults to 0
-    * @param {number} [maxResults] How many results on the page should be included. Defaults to 50.
+    * @param {PageOptions} [pageOptions] The page offset, if not specified then defaults to 0
     * @returns {Promise<Page<FieldMeta>>} Promise with the requested page data
     */
-    async listFields(projectIdOrKey: string, issueTypeId: string, startAt?: number, maxResults?: number): Promise<Page<FieldMeta>> {
+    async listFields(projectIdOrKey: string, issueTypeId: string, pageOptions?: PageOptions): Promise<Page<FieldMeta>> {
         const request = this.doGet({
             param: projectIdOrKey + '/issuetypes/' + issueTypeId,
+            pageOptions: pageOptions,
         });
         try {
-            if (startAt !== undefined) {
-                request.addQueryParam('startAt', startAt);
-            }
-            if (maxResults !== undefined) {
-                request.addQueryParam('maxResults', maxResults);
-            }
             const result = await request.execute();
             return result.data as Page<FieldMeta>;
         } catch (error) {
@@ -723,10 +718,10 @@ export class IssueEndpoint extends EndpointService {
     };
 
     /**
-     * Contains all operations related with issue worklogs
+     * Contains all operations related with issue attachments
      * All paths and operations from '/rest/api/latest/issue/{issueIdOrKey}/attachments'.
      * @param {string} issueId The issue id 
-     * @returns {IssueAttachmentEndpoint} Get all operations about issue worklogs
+     * @returns {IssueAttachmentEndpoint} Get all operations about issue attachments
      */
     attachments = (issueId: string) => {
         return new IssueAttachmentEndpoint(this.auth, issueId);

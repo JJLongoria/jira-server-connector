@@ -1,4 +1,4 @@
-import { Basic, EndpointService, IssueLink, IssueLinkType, IssueLinkTypes } from "../types";
+import { Basic, EndpointService, IssueLink, LinkIssueRequest, IssueLinkType, IssueLinkTypes, LinkIssue, IssueLinkTypeInput } from "../types";
 
 
 /**
@@ -26,10 +26,10 @@ export class IssueLinkTypesEndpoint extends EndpointService {
 
     /**
     * Create a new issue link type
-    * @param {IssueLinkType} issueLinkType The issue link type to create
+    * @param {IssueLinkTypeInput} issueLinkType The issue link type to create
     * @returns {Promise<IssueLinkType>} Promise with the created issue link type data
     */
-    async create(issueLinkType: IssueLinkType): Promise<IssueLinkType> {
+    async create(issueLinkType: IssueLinkTypeInput): Promise<IssueLinkType> {
         const request = this.doPost().asJson().withBody(issueLinkType);
         try {
             const result = await request.execute();
@@ -59,10 +59,10 @@ export class IssueLinkTypesEndpoint extends EndpointService {
     /**
     * Update the specified issue link type.
     * @param {string} issueLinkTyeId The issue link type to update
-    * @param {IssueLinkType} issueLinkType The issue link type to update
+    * @param {IssueLinkTypeInput} issueLinkType The issue link type to update
     * @returns {Promise<IssueLinkType>} Promise with the requested issue link type data
     */
-    async update(issueLinkTyeId: string, issueLinkType: IssueLinkType): Promise<IssueLinkType> {
+    async update(issueLinkTyeId: string, issueLinkType: IssueLinkTypeInput): Promise<IssueLinkType> {
         const request = this.doPut({
             param: issueLinkTyeId
         }).asJson().withBody(issueLinkType);
@@ -120,13 +120,13 @@ export class IssueLinkEndpoint extends EndpointService {
     * It will add the supplied comment to the first issue. The comment can have a restriction who can view it. 
     * If group is specified, only users of this group can view this comment, if roleLevel is specified only users who have the specified role can view this comment. 
     * The user who creates the issue link needs to belong to the specified group or have the specified role.
-    * @param {IssueLink} issueLink The issue link to create
+    * @param {LinkIssueRequest} linkRequest The issue link to create
     * @returns {Promise<void>} If not throw errors, operation finish successfully
     */
-    async create(issueLink: IssueLink): Promise<void> {
+    async create(linkRequest: LinkIssueRequest): Promise<void> {
         const request = this.doPost({
             param: 'issueLink'
-        }).asJson().withBody(issueLink);
+        }).asJson().withBody(linkRequest);
         try {
             const result = await request.execute();
             return;
@@ -138,15 +138,15 @@ export class IssueLinkEndpoint extends EndpointService {
     /**
     * Returns an issue link with the specified id
     * @param {string} issueLinkId The issue link id to retrieve
-    * @returns {Promise<IssueLink>} Promise with the issue link requested data
+    * @returns {Promise<LinkIssue>} Promise with the issue link requested data
     */
-    async get(issueLinkId: string): Promise<IssueLink> {
+    async get(issueLinkId: string): Promise<LinkIssue> {
         const request = this.doGet({
             param: 'issueLink/' + issueLinkId
         });
         try {
             const result = await request.execute();
-            return result.data as IssueLink;
+            return result.data as LinkIssue;
         } catch (error) {
             throw error;
         }
