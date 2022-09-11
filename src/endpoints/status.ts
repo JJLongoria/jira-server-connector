@@ -13,7 +13,7 @@ export class StatusEndpoint extends EndpointService {
     * Returns paginated list of filtered statuses
     * @param {StatusOptions} [options] The options to get statuses
     * @param {PageOptions} [pageOptions] Page options to paginate results (or obtain more results per page)
-    * @returns {Promise<Page<Resolution>>} Promise with the requested page data
+    * @returns {Promise<Page<Status>>} Promise with the requested page data
     */
     async list(query?: StatusOptions, pageOptions?: PageOptions): Promise<Page<Status>> {
         const request = this.doGet({

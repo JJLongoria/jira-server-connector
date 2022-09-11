@@ -86,6 +86,20 @@ export class EndpointService {
         }
     }
 
+    protected processPage(page: Page<any>) {
+        if (page.nextPageStart === undefined && !page.isLast) {
+            if (page.nextPage) {
+                const url = new URL(page.nextPage);
+                const startAt = url.searchParams.get('startAt');
+                if (startAt) {
+                    page.nextPageStart = Number(startAt);
+                }
+            } else {
+                page.nextPageStart = page.startAt + page.maxResults;
+            }
+        }
+    }
+
     protected doGet(options?: EndpointServiceOptions) {
         const endpoint = this.getEndpoint(options);
         const request = HTTP.get(endpoint).addHeader(this.AUTH_HEADER, this.auth.header());
@@ -148,10 +162,10 @@ export interface JiraErrorData {
 }
 
 export interface PageOptions {
-    maxResults: number;
-    startAt: number;
-    orderBy?: string;
+    maxResults?: number;
+    startAt?: number;
     expand?: string;
+    orderBy?: string;
 }
 
 export class Page<T> {
@@ -234,6 +248,12 @@ export interface ApplicationRole {
     platform: boolean;
 }
 
+export interface ApplicationRoleInput {
+    key: string;
+    groups?: string[];
+    defaultGroups?: string[];
+}
+
 export interface ListWrapper<T> {
     size: number;
     'max-results'?: number;
@@ -249,6 +269,8 @@ export interface Group extends Self {
 }
 
 export interface Attachment extends Self {
+    id: string;
+    author: User;
     filename: string;
     created: string;
     size: number;
@@ -300,24 +322,41 @@ export interface AvatarCroping {
     needsCropping: boolean;
 }
 
+export interface ComponentOptions {
+    startAt?: number;
+    maxResults?: number;
+    query?: string;
+    projectIds?: string;
+}
+
 export interface Component extends Self {
-    id?: string;
+    id: string;
     name: string;
     description: string;
-    lead?: User;
+    lead: User;
     leadUserName: string;
     assigneeType: 'PROJECT_DEFAULT' | 'COMPONENT_LEAD' | 'PROJECT_LEAD' | 'UNASSIGNED';
-    assignee?: User;
+    assignee: User;
     realAssigneeType?: 'PROJECT_DEFAULT' | 'COMPONENT_LEAD' | 'PROJECT_LEAD' | 'UNASSIGNED';
-    realAssignee?: User;
+    realAssignee: User;
     isAssigneeTypeValid: boolean;
     project: string;
     projectId: number;
-    archived?: boolean;
-    deleted?: boolean;
+    archived: boolean;
+    deleted: boolean;
 }
 
-export interface IssuesCount extends Self {
+export interface ComponentInput extends Self {
+    name: string;
+    description: string;
+    leadUserName: string;
+    assigneeType: 'PROJECT_DEFAULT' | 'COMPONENT_LEAD' | 'PROJECT_LEAD' | 'UNASSIGNED';
+    isAssigneeTypeValid: boolean;
+    project: string;
+    projectId: number;
+}
+
+export interface ComponentIssuesCount extends Self {
     issueCount: number;
 }
 
@@ -380,6 +419,8 @@ export interface ListFieldOptions {
     screenIds?: string;
     types?: string;
     lastValueUpdate?: number;
+    sortOrder?: string;
+    sortColumn?: string;
     pageOptions?: PageOptions;
 }
 
@@ -444,7 +485,7 @@ export interface FieldSchema {
 
 
 export interface IssueType extends Self {
-    id?: string;
+    id: string;
     description: string;
     iconUrl?: string;
     name: string;
@@ -479,7 +520,7 @@ export interface RemoteEntityLink extends Self {
 }
 
 export interface Version {
-    id?: string;
+    id: string;
     description: string;
     name: string;
     archived: boolean;
@@ -509,7 +550,7 @@ export interface VersionInput {
 }
 
 export interface Project {
-    id?: string;
+    id: string;
     key: string;
     description: string;
     lead?: User;
@@ -517,8 +558,8 @@ export interface Project {
     issueTypes?: IssueType[];
     url: string;
     email: string;
-    assigneeType?: 'PROJECT_LEAD' | 'UNASSIGNED';
-    versions?: Version[];
+    assigneeType: 'PROJECT_LEAD' | 'UNASSIGNED';
+    versions: Version[];
     name: string;
     roles: { [key: string]: string };
     avatarUrls: { [key: string]: string };
@@ -527,6 +568,8 @@ export interface Project {
     projectTypeKey: string;
     archived: boolean;
 }
+
+
 
 export interface ProjectsSearchResult {
     projects: Project[],
@@ -561,17 +604,25 @@ export interface RoleActor {
 }
 
 export interface Filter {
-    id?: string;
+    id: string;
     name: string;
     description: string;
-    owner?: User;
+    owner: User;
     jql: string;
-    viewUrl?: string;
-    searchUrl?: string;
+    viewUrl: string;
+    searchUrl: string;
     favourite: boolean;
-    sharePermissions?: FilterPermission[];
-    sharedUsers?: ListWrapper<User>;
-    subscriptions?: ListWrapper<FilterSubscription>;
+    sharePermissions: FilterPermission[];
+    sharedUsers: ListWrapper<User>;
+    subscriptions: ListWrapper<FilterSubscription>;
+    editable: boolean;
+}
+
+export interface FilterInput {
+    name: string;
+    description: string;
+    jql: string;
+    favourite: boolean;
     editable: boolean;
 }
 
@@ -581,20 +632,28 @@ export interface FilterSubscription {
     group?: Group;
 }
 
-export interface FilterPermission {
-    id?: string;
-    type?: string;
-    project?: Project;
-    role?: ProjectRole;
-    group?: Group;
+export interface FilterSubscriptionInput {
     user?: User;
+    group?: Group;
+}
+
+export interface FilterPermission {
+    id: string;
+    type: string;
+    project: Project;
+    role: ProjectRole;
+    group: Group;
+    user: User;
     view: boolean;
     edit: boolean;
 }
 
-export interface FilterColumn {
-    label: string;
-    value: string;
+export interface FilterPermissionInput {
+    view: boolean;
+    edit: boolean;
+    groupname?: Group;
+    username?: User;
+    type: string;
 }
 
 export interface ShareScope {
@@ -602,13 +661,12 @@ export interface ShareScope {
 }
 
 export interface GroupMemberOptions {
-    groupname?: string;
     includeInactiveUsers?: boolean;
-    startAt: number;
-    maxResults: number;
+    startAt?: number;
+    maxResults?: number;
 }
 
-export interface FindGroupsOptions {
+export interface PickGroupsOptions {
     query: string;
     exclude?: string;
     maxResults?: number;
@@ -666,7 +724,7 @@ export interface GroupsSuggestion {
     header: string;
 }
 
-export interface IssueUpdate {
+export interface IssueInput {
     transition?: IssueTransition;
     fields?: { [key: string]: any };
     update?: { [key: string]: any[] };
@@ -682,6 +740,7 @@ export interface IssueLink extends Self {
 
 export interface IssueLinks {
     issues: IssueLink[];
+    errors: string[];
 }
 
 export interface IssueOptions {
@@ -692,11 +751,11 @@ export interface IssueOptions {
 }
 
 export interface Issue {
-    expand?: string;
-    id?: string;
+    expand: string;
+    id: string;
     key: string;
-    fields?: { [key: string]: any };
-    renderedFields?: { [key: string]: any };
+    fields: { [key: string]: any };
+    renderedFields: { [key: string]: any };
     properties: {
         properties: { [key: string]: string };
     };
@@ -761,7 +820,7 @@ export interface EditMeta {
 }
 
 export interface LinkGroup {
-    id?: string;
+    id: string;
     styleClass: string;
     header: SimpleLink;
     weight: number;
@@ -777,7 +836,7 @@ export interface ChangeLog {
 }
 
 export interface ChangeHistory {
-    id?: string;
+    id: string;
     author: User;
     created: string;
     items: ChangeItem[];
@@ -821,16 +880,21 @@ export interface FieldOperation {
 }
 
 export interface Comment extends Self {
-    id?: string;
-    author?: User;
+    id: string;
+    author: User;
     body: string;
-    renderedBody?: string;
-    updateAuthor?: User;
-    created?: string;
-    updated?: string;
+    renderedBody: string;
+    updateAuthor: User;
+    created: string;
+    updated: string;
     visibility: Visibility;
-    properties?: EntityProperty[];
+    properties: EntityProperty[];
 
+}
+
+export interface CommentInput {
+    body: string;
+    visibility: Visibility;
 }
 
 export interface Visibility {

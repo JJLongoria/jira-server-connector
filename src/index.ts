@@ -68,11 +68,6 @@ export class JiraServerConnector {
     private auth: Basic;
 
     /**
-     * Contains all operations from '/rest/api/latest/mypermissions' and '/rest/api/latest/permissions'.
-     */
-    permissions: PermissionsEndpoint;
-
-    /**
      * Contains all operations from '/rest/api/latest/application-properties/*'.
      */
     applicationProperties: ApplicationEndpoint;
@@ -188,6 +183,11 @@ export class JiraServerConnector {
     password: PasswordEndpoint;
 
     /**
+     * Contains all operations from '/rest/api/latest/mypermissions' and '/rest/api/latest/permissions'.
+     */
+    permissions: PermissionsEndpoint;
+
+    /**
      * Contains all operations from '/rest/api/latest/permissionscheme'
      */
     permissionSchemes: PermissionSchemeEndpoint;
@@ -288,7 +288,6 @@ export class JiraServerConnector {
      */
     constructor(auth: BasicAuth) {
         this.auth = new Basic(auth);
-        this.permissions = new PermissionsEndpoint(this.auth);
         this.applicationProperties = new ApplicationEndpoint(this.auth);
         this.applicationRoles = new ApplicationRoleEndpoint(this.auth);
         this.attachments = new AttachmentEndpoint(this.auth);
@@ -312,6 +311,7 @@ export class JiraServerConnector {
         this.mySelf = new MySelfEndpoint(this.auth);
         this.notificationSchemes = new NotificationSchemeEndpoint(this.auth);
         this.password = new PasswordEndpoint(this.auth);
+        this.permissions = new PermissionsEndpoint(this.auth);
         this.permissionSchemes = new PermissionSchemeEndpoint(this.auth);
         this.priorities = new PriorityEndpoint(this.auth);
         this.projects = new ProjectEndpoint(this.auth);

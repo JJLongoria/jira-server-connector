@@ -1,4 +1,4 @@
-import { ApplicationRole, Basic, EndpointService } from "../types";
+import { ApplicationRole, ApplicationRoleInput, Basic, EndpointService } from "../types";
 
 /**
  * Class to manage and expose all endpoints and operations below '/rest/api/latest/applicationrole'
@@ -25,11 +25,11 @@ export class ApplicationRoleEndpoint extends EndpointService {
 
     /**
      * Updates the Application Roles with the passed data if the version hash is the same as the server. Only the groups and default groups setting of the role may be updated
-     * @param {ApplicationRole[]} rolesToUpdate Application Roles to update
+     * @param {ApplicationRoleInput[]} rolesToUpdate Application Roles to update
      * @param {string} [ifMacth] If versionHash is passed through the If-Match header the request will be rejected if not the same as server
      * @returns {Promise<ApplicationRole[]>} Promise with the updated application roles data
      */
-    async updateBulk(rolesToUpdate: ApplicationRole[], ifMacth?: string): Promise<ApplicationRole[]> {
+    async updateBulk(rolesToUpdate: ApplicationRoleInput[], ifMacth?: string): Promise<ApplicationRole[]> {
         const request = this.doPut().asJson().withBody(rolesToUpdate);
         try {
             if (ifMacth) {
@@ -62,11 +62,11 @@ export class ApplicationRoleEndpoint extends EndpointService {
     /**
      * Updates the ApplicationRole with the passed data. Only the groups and default groups setting of the role may be updated.
      * @param {string} key Role key to update
-     * @param {ApplicationRole} roleToUpdate Role date to update
+     * @param {ApplicationRoleInput} roleToUpdate Role date to update
      * @param {string} [ifMacth] If versionHash is passed through the If-Match header the request will be rejected if not the same as server
      * @returns {Promise<ApplicationRole>} Promise with the updated application role data
      */
-    async update(key: string, roleToUpdate: ApplicationRole, ifMacth?: string): Promise<ApplicationRole> {
+    async update(key: string, roleToUpdate: ApplicationRoleInput, ifMacth?: string): Promise<ApplicationRole> {
         const request = this.doPut({
             param: key
         }).asJson().withBody(roleToUpdate);

@@ -43,11 +43,17 @@ export class DashboardItemPropertiesEndpoint extends EndpointService {
     /**
     * Sets the value of the specified dashboard item's property. 
     * You can use this resource to store a custom data against the dashboard item identified by the id. The user who stores the data is required to have permissions to administer the dashboard item. 
-    * @param {EntityProperty} property The property to set
+    * @param {string} propertyKey The property key to set
+    * @param {any} value The property value to set
     * @returns {Promise<void>} If not throw errors, operation finish successfully
     */
-    async set(property: EntityProperty): Promise<void> {
-        const request = this.doPut().asJson().withBody(property);
+    async set(propertyKey: string, value: any): Promise<void> {
+        const request = this.doPut({
+            param: propertyKey
+        }).asJson().withBody({
+            key: propertyKey,
+            value: value
+        });
         try {
             const result = await request.execute();
             return;

@@ -14,7 +14,7 @@ export class CustomFieldEndpoint extends EndpointService {
     * @param {string} fieldId Custom field Id
     * @returns {Promise<CustomFieldOption>} Promise with the Custom Field Option
     */
-    async get(fieldId: string): Promise<CustomFieldOption> {
+    async options(fieldId: string): Promise<CustomFieldOption> {
         const request = this.doGet({
             param: 'customFieldOption/' + fieldId
         });
@@ -31,7 +31,7 @@ export class CustomFieldEndpoint extends EndpointService {
     * @param {ListFieldOptions} options List Custom Fields options
     * @returns {Promise<CustomField>} Promise with a requested custom fields page data
     */
-     async list(options: ListFieldOptions): Promise<Page<CustomField>> {
+    async list(options: ListFieldOptions): Promise<Page<CustomField>> {
         const request = this.doGet({
             param: 'customFields',
             pageOptions: options.pageOptions
@@ -39,7 +39,9 @@ export class CustomFieldEndpoint extends EndpointService {
         try {
             this.processOptions(request, options);
             const result = await request.execute();
-            return result.data as Page<CustomField>;
+            const data = result.data as Page<CustomField>;
+            this.processPage(data);
+            return data;
         } catch (error) {
             throw error;
         }
@@ -50,7 +52,7 @@ export class CustomFieldEndpoint extends EndpointService {
     * @param {string[]} fieldIds List Custom Fields options
     * @returns {Promise<CustomField>} Promise with a requested custom fields page data
     */
-     async deleteBulk(fieldIds: string[]): Promise<DeletedFieldsOutput> {
+    async deleteBulk(fieldIds: string[]): Promise<DeletedFieldsOutput> {
         const request = this.doDelete({
             param: 'customFields'
         });

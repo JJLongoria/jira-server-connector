@@ -1,4 +1,4 @@
-import { Basic, EndpointService, Filter, FilterColumn, FilterPermission, ShareScope } from "../types";
+import { Basic, ColumnItem, EndpointService, Filter, FilterInput, FilterPermission, FilterPermissionInput, ShareScope } from "../types";
 
 /**
  * Class to manage and expose all endpoints and operations below '/rest/api/latest/filter/favourite'
@@ -94,14 +94,14 @@ export class FilterPermissionsEndpoint extends EndpointService {
 
     /**
     * Adds a share permissions to the given filter. Adding a global permission removes all previous permissions from the filter.
-    * @param {FilterPermission} filterPermission Filter Permission to create
+    * @param {FilterPermissionInput[]} filterPermissions Filter Permissions to create
     * @returns {Promise<FilterColumn[]>} Promise with a list of created filter permissions data
     */
-    async create(filterPermission: FilterPermission): Promise<FilterColumn[]> {
+    async add(filterPermission: FilterPermissionInput[]): Promise<FilterPermission[]> {
         const request = this.doPost().asJson().withBody(filterPermission);
         try {
             const result = await request.execute();
-            return result.data as FilterColumn[];
+            return result.data as FilterPermission[];
         } catch (error) {
             throw error;
         }
@@ -155,11 +155,11 @@ export class FilterColumnsEndpoint extends EndpointService {
     * Returns the default columns for the given filter. Currently logged in user will be used as the user making such request
     * @returns {Promise<FilterColumn[]>} Promise with a list of columns for configured for the given user
     */
-    async list(): Promise<FilterColumn[]> {
+    async list(): Promise<ColumnItem[]> {
         const request = this.doGet();
         try {
             const result = await request.execute();
-            return result.data as FilterColumn[];
+            return result.data as ColumnItem[];
         } catch (error) {
             throw error;
         }
@@ -170,11 +170,11 @@ export class FilterColumnsEndpoint extends EndpointService {
     * @param {FilterColumn[]} columns Columns to set as defaults
     * @returns {Promise<FilterColumn[]>} Promise with a list of columns for configured for the given user
     */
-    async set(columns: FilterColumn[]): Promise<FilterColumn[]> {
+    async set(columns: ColumnItem[]): Promise<ColumnItem[]> {
         const request = this.doPut().asJson().withBody(columns);
         try {
             const result = await request.execute();
-            return result.data as FilterColumn[];
+            return result.data as ColumnItem[];
         } catch (error) {
             throw error;
         }
@@ -245,12 +245,12 @@ export class FilterEndpoint extends EndpointService {
 
     /**
     * Creates a new filter, and returns newly created filter. Currently sets permissions just using the users default sharing permissions
-    * @param {Filter} filter Filter data to create
+    * @param {FilterInput} filterInput Filter data to create
     * @param {string} [expand] The parameters to expand
     * @returns {Promise<Filter>} Promise with the created filter data
     */
-    async create(filter: Filter, expand?: string): Promise<Filter> {
-        const request = this.doPost().asJson().withBody(filter);
+    async create(filterInput: FilterInput, expand?: string): Promise<Filter> {
+        const request = this.doPost().asJson().withBody(filterInput);
         try {
             if (expand) {
                 request.addQueryParam('expand', expand);

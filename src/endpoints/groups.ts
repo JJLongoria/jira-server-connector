@@ -1,12 +1,15 @@
-import { Basic, EndpointService, FindGroupsOptions, FindUserAndGroupsOptions, Group, GroupMemberOptions, GroupSuggestions, Page, User, UserAndGroups } from "../types";
+import { Basic, EndpointService, PickGroupsOptions, FindUserAndGroupsOptions, Group, GroupMemberOptions, GroupSuggestions, Page, User, UserAndGroups } from "../types";
 
 /**
  * Class to manage and expose all endpoints and operations below '/rest/api/latest/group/user' and '/rest/api/latest/groups/member'
  */
 export class GroupMemberEndpoint extends EndpointService {
 
-    constructor(auth: Basic, path: string) {
-        super(auth, '/' + path);
+    private groupName: string;
+
+    constructor(auth: Basic, groupName: string) {
+        super(auth, '/group');
+        this.groupName = groupName;
     }
 
     /**
@@ -15,12 +18,15 @@ export class GroupMemberEndpoint extends EndpointService {
     * @param {GroupMemberOptions} options The name of the group to delete.
     * @returns {Promise<Page<User>>} Promise with the requested page data
     */
-    async list(options?: GroupMemberOptions): Promise<Page<User>> {
+    async list(options: GroupMemberOptions): Promise<Page<User>> {
         const request = this.doGet({
             param: 'member'
         });
         try {
-            this.processOptions(request, options);
+            this.processOptions(request, {
+                groupname: this.groupName,
+                ...options
+            });
             const result = await request.execute();
             return result.data as Page<User>;
         } catch (error) {
@@ -31,17 +37,16 @@ export class GroupMemberEndpoint extends EndpointService {
     /**
     * Adds given user to a group
     * @param {string} userName The name of the user to add.
-    * @param {string} groupName The name of the group to add the user.
     * @returns {Promise<Group>} Promise with the group data
     */
-    async create(userName: string, groupName: string): Promise<Group> {
+    async create(userName: string): Promise<Group> {
         const request = this.doPost({
             param: 'user'
         }).asJson().withBody({
             name: userName
         });
         try {
-            request.addQueryParam('groupname', groupName);
+            request.addQueryParam('groupname', this.groupName);
             const result = await request.execute();
             return result.data as Group;
         } catch (error) {
@@ -52,16 +57,15 @@ export class GroupMemberEndpoint extends EndpointService {
     /**
     * Removes given user from a group 
     * @param {string} userName The name of the user to remove.
-    * @param {string} groupName The name of the group to remove from.
     * @returns {Promise<void>} If not throw errors, operation finish successfully
     */
-    async delete(userName: string, groupName?: string): Promise<void> {
+    async delete(userName: string): Promise<void> {
         const request = this.doDelete({
             param: 'user'
-        })
+        });
         try {
             request.addQueryParam('username', userName);
-            request.addQueryParam('groupname', groupName);
+            request.addQueryParam('groupname', this.groupName);
             const result = await request.execute();
             return;
         } catch (error) {
@@ -79,11 +83,11 @@ export class GroupEndpoint extends EndpointService {
     /**
      * Contains all operations related with group members
      * All paths and operations from '/rest/api/latest/group/user' and '/rest/api/latest/groups/member'.
-     * @param {string} itemId The item id 
+     * @param {string} groupName The group name 
      * @returns {GroupMemberEndpoint} Get all operations about group members
      */
-    members = () => {
-        return new GroupMemberEndpoint(this.auth, 'group');
+    members = (groupName: string) => {
+        return new GroupMemberEndpoint(this.auth, groupName);
     };
 
     constructor(auth: Basic) {
@@ -92,13 +96,15 @@ export class GroupEndpoint extends EndpointService {
 
     /**
     * Creates a group by given group parameter 
-    * @param {Group} group Group data to create
+    * @param {string} groupName The group name to create
     * @returns {Promise<Group>} Promise with the requested group data
     */
-    async create(group: Group): Promise<Group> {
+    async create(groupName: string): Promise<Group> {
         const request = this.doPost({
             param: 'group'
-        }).asJson().withBody(group);
+        }).asJson().withBody({
+            name: groupName,
+        });
         try {
             const result = await request.execute();
             return result.data as Group;
@@ -132,10 +138,10 @@ export class GroupEndpoint extends EndpointService {
     /**
      * Returns groups with substrings matching a given query. This is mainly for use with the group picker, so the returned groups contain html to be used as picker suggestions. 
      * The groups are also wrapped in a single response object that also contains a header for use in the picker, specifically Showing X of Y matching groups 
-     * @param {FindGroupsOptions} options Find Group options to search groups
+     * @param {PickGroupsOptions} options Find Group options to search groups
      * @returns {Promise<GroupSuggestions>} Promise with the requested group suggestions data
      */
-    async find(options: FindGroupsOptions): Promise<GroupSuggestions> {
+    async pick(options: PickGroupsOptions): Promise<GroupSuggestions> {
         const request = this.doDelete({
             param: 'groups/picker'
         })

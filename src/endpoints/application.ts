@@ -29,15 +29,15 @@ export class ApplicationEndpoint extends EndpointService {
     * Modify an application property via PUT. The "value" field present in the PUT will override the existing value.
     * @param {string} propertyId The property id to update
     * @param {ApplicationProperty} property Property data to Update
-    * @returns {Promise<void>} If not throw errors, operation finish succesfully
+    * @returns {Promise<ApplicationProperty>} Promise with the updated application property data
     */
-    async update(propertyId: string, property: ApplicationProperty): Promise<void> {
+    async update(propertyId: string, property: ApplicationProperty): Promise<ApplicationProperty> {
         const request = this.doPut({
             param: propertyId
         }).asJson().withBody(property);
         try {
             const result = await request.execute();
-            return;
+            return result.data as ApplicationProperty;
         } catch (error) {
             throw error;
         }

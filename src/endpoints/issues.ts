@@ -1,5 +1,5 @@
 import { StrUtils } from "../core/strUtils";
-import { Basic, Comment, CommentsOutput, EditMeta, EndpointService, Issue, IssueLink, IssueLinks, IssueNotification, IssueOptions, IssueRemoteLink, IssueTransition, IssueTransitions, IssueUpdate, IssueVotes, IssueWatchers, IssueWorklog, IssueCreateWorklogsOptions, IssueWorklogsOutput, IssueUpdateWorklogsOptions, CreateMeta, Page, FieldMeta, IssuePickerOutput, IssuePickerOptions, Attachment, PageOptions, SearchIssuesOptions, IssueSearchOutput } from "../types";
+import { Basic, Comment, CommentsOutput, EditMeta, EndpointService, Issue, IssueLink, IssueLinks, IssueNotification, IssueOptions, IssueRemoteLink, IssueTransition, IssueTransitions, IssueInput, IssueVotes, IssueWatchers, IssueWorklog, IssueCreateWorklogsOptions, IssueWorklogsOutput, IssueUpdateWorklogsOptions, CreateMeta, Page, FieldMeta, IssuePickerOutput, IssuePickerOptions, Attachment, PageOptions, SearchIssuesOptions, IssueSearchOutput, CommentInput } from "../types";
 
 /**
  * Class to manage and expose all endpoints and operations below '/rest/api/latest/issue/{issueIdOrKey}/comment'
@@ -31,8 +31,8 @@ export class IssueCommentEndpoint extends EndpointService {
             page.startAt = data.startAt;
             page.total = data.total;
             page.values = data.comments;
-            page.nextPageStart = (!page.isLast && !page.nextPage) ? (page.startAt + page.maxResults) : undefined;
-            return result.data as Page<Comment>;
+            this.processPage(page);
+            return page;
         } catch (error) {
             throw error;
         }
@@ -40,10 +40,10 @@ export class IssueCommentEndpoint extends EndpointService {
 
     /**
      * Adds a new comment to an issue
-     * @param {Comment} commentData The issue comment to create
+     * @param {CommentInput} commentData The issue comment to create
      * @returns {Promise<IssueLink>} Promise with the created comment data
      */
-    async create(commentData: Comment): Promise<Comment> {
+    async create(commentData: CommentInput): Promise<Comment> {
         const request = this.doPost().asJson().withBody(commentData);
         try {
             const result = await request.execute();
@@ -77,14 +77,18 @@ export class IssueCommentEndpoint extends EndpointService {
     /**
      * Updates an existing comment using its JSON representation
      * @param {string} commentId The comment id to update
-     * @param {Comment} commentData The issue comment to update
+     * @param {CommentInput} commentData The issue comment to update
+     * @param {string} [expand] Optional flags: renderedBody (provides body rendered in HTML)
      * @returns {Promise<Comment>} Promise with the created comment data
      */
-    async update(commentId: string, commentData: Comment): Promise<Comment> {
+    async update(commentId: string, commentData: CommentInput, expand?: string): Promise<Comment> {
         const request = this.doPut({
             param: commentId
         }).asJson().withBody(commentData);
         try {
+            if (expand) {
+                request.addQueryParam('expand', expand);
+            }
             const result = await request.execute();
             return result.data as Comment;
         } catch (error) {
@@ -287,11 +291,11 @@ export class IssueTransitionEndpoint extends EndpointService {
     * If a field is not configured to appear on the transition screen, then it will not be in the transition metadata, and a field validation error will occur if it is submitted. 
     * The updateHistory param adds the issues retrieved by this method to the current user's issue history, if set to true (by default, the issue history does not include issues retrieved via the REST API). 
     * You can view the issue history in the Jira application, via the Issues dropdown or by using the lastViewed JQL field in an issue search.
-    * @param {IssueUpdate} issueUpdateData Issue update data with transition to change
+    * @param {IssueInput} issueUpdateData Issue update data with transition to change
     * @param {string} [expand] Parameters to expand
     * @returns {Promise<void>} If not throw errors, operation finish successfully
     */
-    async execute(issueUpdateData: IssueUpdate, expand?: string): Promise<void> {
+    async execute(issueUpdateData: IssueInput, expand?: string): Promise<void> {
         const request = this.doPost().asJson().withBody(issueUpdateData);
         try {
             if (expand) {
@@ -749,11 +753,11 @@ export class IssueEndpoint extends EndpointService {
     * Creating a sub-task is similar to creating a regular issue, with two important differences: 
     * 1. - The issueType field must correspond to a sub-task issue type (you can use /issue/createmeta to discover sub-task issue types), and you must provide a parent field in the issue create request containing the id or key of the parent issue. 
     * 2. - The updateHistory param adds the project that this issue is created in, to the current user's project history, if set to true (by default, the project history is not updated).
-    * @param {IssueUpdate} issueData The issue data to create
+    * @param {IssueInput} issueData The issue data to create
     * @param {boolean} updateHistory If true then the user's project history is updated
     * @returns {Promise<IssueLink>} Promise with the created issue link
     */
-    async create(issueData: IssueUpdate, updateHistory?: boolean): Promise<IssueLink> {
+    async create(issueData: IssueInput, updateHistory?: boolean): Promise<IssueLink> {
         const request = this.doPost().asJson().withBody(issueData);
         try {
             if (updateHistory !== undefined) {
@@ -772,10 +776,10 @@ export class IssueEndpoint extends EndpointService {
     * Creating a sub-task is similar to creating a regular issue, with two important differences: 
     * 1. - The issueType field must correspond to a sub-task issue type (you can use /issue/createmeta to discover sub-task issue types), and you must provide a parent field in the issue create request containing the id or key of the parent issue. 
     * 2. - The updateHistory param adds the project that this issue is created in, to the current user's project history, if set to true (by default, the project history is not updated).
-    * @param {IssueUpdate[]} issuesData The issue data to create
+    * @param {IssueInput[]} issuesData The issue data to create
     * @returns {Promise<IssueLinks>} Promise with the created issues links
     */
-    async createBulk(issuesData: IssueUpdate[]): Promise<IssueLinks> {
+    async createBulk(issuesData: IssueInput[]): Promise<IssueLinks> {
         const request = this.doPost({
             param: 'bulk'
         }).asJson().withBody({
@@ -813,11 +817,11 @@ export class IssueEndpoint extends EndpointService {
      * Edits an issue from a JSON representation. The issue can either be updated by setting explicit the field value(s) or by using an operation to change the field value. . The fields that can be set on create, in either the fields parameter or the update parameter can be determined using the /rest/api/2/issue/editmeta resource. 
      * If a field is not configured to appear on the create screen, then it will not be in the createmeta, and a field validation error will occur if it is submitted. 
      * @param {string} issueIdOrKey The issue id or key to update
-     * @param {IssueUpdate} issueData The issue data to create
+     * @param {IssueInput} issueData The issue data to create
      * @param {boolean} notifyUsers Send the email with notification that the issue was updated to users that watch it. Admin or project admin permissions are required to disable the notification.
      * @returns {Promise<void>} If not throw errors, operation finish successfully
      */
-    async update(issueIdOrKey: string, issueData: IssueUpdate, notifyUsers?: boolean): Promise<void> {
+    async update(issueIdOrKey: string, issueData: IssueInput, notifyUsers?: boolean): Promise<void> {
         const request = this.doPut({
             param: issueIdOrKey
         }).asJson().withBody(issueData);
@@ -898,15 +902,16 @@ export class IssueEndpoint extends EndpointService {
     /**
     * Assigns an issue to a user. You can use this resource to assign issues when the user submitting the request has the assign permission but not the edit issue permission. If the username is "-1" automatic assignee is used. A null username will remove the assignee..
     * @param {string} issueIdOrKey The issue id or key to archive
-    * @param {string} username The username to assign
+    * @param {string} [username] The username to assign
     * @returns {Promise<void>} If not throw errors, operation finish successfully
     */
-    async assign(issueIdOrKey: string, username: string): Promise<void> {
+    async assign(issueIdOrKey: string, username?: string): Promise<void> {
         const request = this.doPut({
             param: issueIdOrKey + '/assignee'
+        }).asJson().withBody({
+            name: username !== undefined ? username : null,
         });
         try {
-            request.addQueryParam('name', username);
             const result = await request.execute();
             return;
         } catch (error) {
