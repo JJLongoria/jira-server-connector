@@ -2,7 +2,7 @@
   "name": "jira-server-connector",
   "productName": "Jira Server REST API Connector",
   "displayName": "Jira Server REST API Connector",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Module to handle and work with Atlassian Jira Server throug REST API. Admin your projects and issues in Jira easy. This project is not an Atlassian official project but use the Atlassian Jira Server REST API",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

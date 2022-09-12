@@ -27,7 +27,7 @@ export class Basic {
 
     private processURL(url: string) {
         if (url.endsWith('/')) {
-            return url.substring(0, url.length - 2);
+            return url.substring(0, url.length - 1);
         }
         return url;
     }
